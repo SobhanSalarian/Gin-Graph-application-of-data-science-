@@ -1,8 +1,6 @@
 # Project Plan — Replicating GIN (Graph Isomorphism Network)
 
-**Status legend:** ⬜ not started · 🔄 in progress · ✅ done · ⚠️ blocked/issue found
-
-Last updated: 2026-08-24 (session 2)
+Last updated: 2026-08-25
 
 ---
 
@@ -11,7 +9,7 @@ Last updated: 2026-08-24 (session 2)
 - **Paper:** "How Powerful are Graph Neural Networks?" — Xu, Hu, Leskovec & Jegelka, ICLR 2019 (CORE A*). [arXiv:1810.00826](https://arxiv.org/abs/1810.00826)
 - **Official code:** https://github.com/weihua916/powerful-gnns
 - **Track:** Novel project (self-chosen paper, needs feasibility justification in the proposal)
-- **Why this paper** (full reasoning in `proposal/justification.md` once written): theoretically grounded (proves GIN = Weisfeiler-Lehman test expressiveness, the ceiling for message-passing GNNs), ICLR is CORE A*, task shape (graph classification) is simpler to redo on new data than transductive node classification, and 3 of its benchmark datasets (IMDB, COLLAB, REDDIT) are literally built from scrapeable public metadata — giving an unusually clean "new data" story.
+- **Why this paper:** theoretically grounded (proves GIN matches the Weisfeiler-Lehman test, the expressiveness ceiling for message-passing GNNs), ICLR is CORE A*, task shape (graph classification, clean train/test split) is simpler to redo on new data than transductive node classification (e.g. GCN), and 3 of its benchmark datasets (IMDB, COLLAB, REDDIT) are built from scrapeable public metadata — giving an unusually clean "new data" story. Full write-up goes in `proposal/justification.md`.
 
 ## 1. Assignment requirements (recap, from `instructions .md`)
 
@@ -20,83 +18,82 @@ Last updated: 2026-08-24 (session 2)
 - Must show: (a) unit techniques/tools used, (b) real replication attempt on original data, (c) new data created + code that runs, (d) polished writeup
 - GitHub repo is part of the submission (report, new data, generation scripts)
 
-## 2. Phase plan
+## 2. Setup
 
-### Phase A — Environment & setup
-- [x] Confirm local tooling: Python 3.11.9, pip 24.0, git 2.53.0, **no conda**, internet access to GitHub confirmed
-- [x] Create project folder structure (`replication/`, `new_data/`, `report/`, `proposal/`, `presentation/`, `results/`, `notebooks/`)
-- [x] Init local git repo (not yet pushed anywhere — will ask before creating/pushing to a remote). First commit: scaffolding + plan.md.
-- [x] Clone official GIN repo into `replication/official-repo/`
-- [x] Attempt to install official repo's dependencies — **result: no friction at all.** Installed current CPU PyTorch (2.13.0+cpu) via `pip install torch --index-url https://download.pytorch.org/whl/cpu`, then `pip install -r requirements.txt` (tqdm, numpy, networkx). Despite the README only claiming to test PyTorch 0.4.1/1.0.0, the code runs unmodified on 2.13.0. Only 2 harmless deprecation warnings (`lr_scheduler.step()` ordering, `torch.sparse.FloatTensor` → should use `torch.sparse_coo_tensor`), no functional impact.
-- [x] Smoke-tested: `python main.py --dataset MUTAG --epochs 3 --iters_per_epoch 20 --fold_idx 0` ran end-to-end on CPU. 3 epochs took ~1 second total (188 graphs, tiny). Test accuracy already 78.9% after just 3 epochs (paper reports ~86-90% with full training/hyperparameters) — strong sign a full run will reproduce the paper's ballpark.
-- [x] Datasets: **no separate download needed** — `dataset.zip` (33MB) ships inside the official repo itself, containing all 9 benchmarks: MUTAG, PROTEINS, PTC, NCI1 (bioinformatics), COLLAB, IMDBBINARY, IMDBMULTI, REDDITBINARY, REDDITMULTI5K (social). Unzipped into `replication/official-repo/dataset/`.
-- [ ] Set up modern fallback path in `replication/modern-pyg/` using PyTorch Geometric — **not needed for now**, official repo works as-is; keep this as a backup/comparison item, not a blocker.
+- [x] Local tooling confirmed: Python 3.11.9, pip 24.0, git 2.53.0, internet access to GitHub
+- [x] Project folder structure created: `replication/`, `new_data/`, `report/`, `proposal/`, `presentation/`, `results/`, `notebooks/`
+- [x] Local git repo initialized (not yet pushed to a remote)
+- [x] Official GIN repo cloned into `replication/official-repo/`
+- [x] Dependencies installed and verified: CPU PyTorch 2.13.0 + `requirements.txt` (tqdm, numpy, networkx). Code runs unmodified despite README only claiming to test PyTorch 0.4.1/1.0.0 — only 2 harmless deprecation warnings, no functional impact
+- [x] Datasets confirmed available: all 9 benchmarks (MUTAG, PTC, PROTEINS, NCI1, COLLAB, IMDB-BINARY, IMDB-MULTI, REDDIT-BINARY, REDDIT-MULTI5K) ship inside the repo's `dataset.zip` — no external download needed
+- [x] Smoke test passed: short run on MUTAG completes end-to-end on CPU in seconds, accuracy already in the right ballpark
+- [x] Training protocol confirmed from `main.py`: Adam optimizer, `StepLR` halving LR every 50 epochs, 350 epochs, 10-fold CV. Default CLI hyperparameters (5 layers, hidden_dim 64, dropout 0.5, batch 32, iters_per_epoch 50, lr 0.01) match the paper's setup
+- [x] Found and worked around a quirk in the official code: `main.py`'s `--filename` output overwrites every epoch instead of appending, so it can't hold a full accuracy curve
+- [x] Wrote `replication/run_gin.py` — our own driver script that runs all 10 folds, captures full per-epoch curves, and reproduces the paper's exact model-selection rule (average the 10 test-accuracy curves, pick the best epoch, report mean ± std across folds at that epoch)
+- [x] Verified the paper's actual Table 1 results directly from the primary source (arXiv HTML render) — see results table in section 4
+- [ ] Optional fallback: modern PyTorch Geometric reimplementation in `replication/modern-pyg/` — not needed unless the official repo path runs into trouble at full scale
 
-### Phase B — Replicate original results
-- [x] Datasets already available (shipped in repo, see Phase A)
-- [x] Inspected `main.py`'s exact training protocol: Adam optimizer, `StepLR` halving the LR every 50 epochs, 350 epochs, 10-fold CV via `separate_data(graphs, seed, fold_idx)`. Default CLI hyperparameters (5 layers, hidden_dim 64, dropout 0.5, batch 32, iters_per_epoch 50, lr 0.01) match the paper's setup — README says these "are not the best performing" (paper does a small grid search per dataset), but they're a legitimate, representative point in that grid.
-- [x] **Found a quirk in the official code**: `main.py`'s `--filename` output option opens the file in `'w'` mode *every epoch*, so it only ever holds the last epoch's numbers, not a full curve — can't be used to reproduce the paper's "average the 10 validation curves, pick best epoch" model-selection procedure as-is.
-- [x] Wrote our own driver script `replication/run_gin.py` (ours, tracked in git — not part of the vendored repo) that: runs all 10 folds via subprocess, captures every epoch's (loss, train_acc, test_acc) from stdout, then reproduces the paper's exact selection rule — average the 10 test-accuracy curves epoch-by-epoch, pick the single epoch with the highest averaged accuracy, report mean ± std across folds at that epoch. Results saved incrementally to `results/logs/<dataset>_cv_curves.json` (survives interruption).
-- [x] Timed 20 epochs / 1 fold on MUTAG: 30s → full 350-epoch × 10-fold run estimated ~80-90 min for MUTAG. Test acc already 89.5% after just 20 epochs (fold 0) — matches paper's reported ~86-90% ballpark.
-- [ ] ⏸️ **Full MUTAG run started, then stopped by user before completion (again)**. Pipeline (`replication/run_gin.py`) is written, tested, and confirmed working — just needs `python run_gin.py --dataset MUTAG --epochs 350` re-run when ready to resume. Partial/incomplete output files deleted each time so nothing half-finished is left lying around.
-- [ ] Repeat for PROTEINS, NCI1 (bioinformatics — similar graph sizes to MUTAG, should be comparable speed)
-- [ ] Repeat for IMDB-BINARY, IMDB-MULTI, COLLAB (social — need `--degree_as_tag` flag per README, since these have no node labels)
-- [ ] REDDIT-BINARY/MULTI5K if compute allows — graphs are much bigger (100s-1000s of nodes vs. MUTAG's ~18), expect this to be the slow one; may need to justify a reduced-epoch or subsampled run
-- [ ] Record accuracy per dataset in `## 6. Replication results` table below, compare against paper's reported numbers
-- [ ] Note any datasets/results we couldn't reproduce and why (resource limits, code rot, etc.) — instructions explicitly allow partial replication if justified
-- [ ] Bonus/investigation experiment: construct a small pair of non-isomorphic graphs that mean/max-pooling GNNs can't distinguish, show GIN can — direct test of the paper's theoretical claim
+## 3. Replication plan (Phase B)
 
-### Phase C — New data creation (scraping)
-- [ ] Pick primary new-data source (leaning **TMDb API**, mirroring IMDB-BINARY/MULTI's "actor co-starring" construction) — confirm API terms/rate limits before building
+- [ ] Run full 10-fold/350-epoch training on MUTAG
+- [ ] Run PROTEINS, NCI1 (bioinformatics — similar graph sizes to MUTAG, comparable runtime expected)
+- [ ] Run IMDB-BINARY, IMDB-MULTI, COLLAB (social — need `--degree_as_tag` flag, no node labels)
+- [ ] Run REDDIT-BINARY, REDDIT-MULTI5K if compute allows (much larger graphs — may need a reduced-epoch or subsampled run, to be justified in the report if so)
+- [ ] Log every dataset's result into the results table below
+- [ ] Note any datasets/results that don't reproduce cleanly and why (resource limits, etc. — explicitly allowed by the assignment if justified)
+- [ ] Investigation experiment: construct a small pair of non-isomorphic graphs that mean/max-pooling GNNs can't distinguish, show GIN can — a direct, hands-on test of the paper's theoretical claim
+
+## 4. Replication results
+
+Paper's Table 1 (GIN-0 variant — the simpler, better-performing of their two GIN variants), verified directly from the paper:
+
+| Dataset | # Graphs | # Classes | Avg # Nodes | Paper GIN-0 acc. | Our result |
+|---|---|---|---|---|---|
+| MUTAG | 188 | 2 | 17.9 | 89.4 ± 5.6% | — |
+| PTC | 344 | 2 | 25.5 | 64.6 ± 7.0% | — |
+| PROTEINS | 1113 | 2 | 39.1 | 76.2 ± 2.8% | — |
+| NCI1 | 4110 | 2 | 29.8 | 82.7 ± 1.7% | — |
+| COLLAB | 5000 | 3 | 74.5 | 80.2 ± 1.9% | — |
+| IMDB-BINARY | 1000 | 2 | 19.8 | 75.1 ± 5.1% | — |
+| IMDB-MULTI | 1500 | 3 | 13.0 | 52.3 ± 2.8% | — |
+| REDDIT-BINARY | 2000 | 2 | 429.6 | 92.4 ± 2.5% | — |
+| REDDIT-MULTI5K | 5000 | 5 | 508.5 | 57.5 ± 1.5% | — |
+
+Paper's headline claim: GIN-0 matches or beats every baseline (WL subtree kernel, DCNN, PatchySAN, DGCNN, GraphSAGE, weaker sum/mean/max-pooling GNN variants) on all 9 datasets.
+
+## 5. New data creation (Phase C)
+
+- [ ] Confirm TMDb API terms/rate limits
 - [ ] Write scraping script(s) in `new_data/scraping/`
-- [ ] Build actor co-starring ego-network graphs, labeled by genre, from movies not in the original IMDB dataset
-- [ ] (Stretch) Second new dataset via OpenAlex (COLLAB-style co-authorship) and/or Reddit API (REDDIT-style), for redundancy/robustness of the "does it generalize" story
-- [ ] Document data quality/limitations vs. the original (dataset size, class balance, etc.)
+- [ ] Build actor co-starring ego-network graphs, labeled by genre, from movies not in the original IMDB dataset (mirrors IMDB-BINARY/MULTI's original construction)
+- [ ] Stretch: second new dataset via OpenAlex (COLLAB-style co-authorship) and/or Reddit API (REDDIT-style), for a second independent test
+- [ ] Document new data quality/limitations vs. the original (size, class balance, etc.)
 
-### Phase D — Test GIN on new data
-- [ ] Run same GIN pipeline (from Phase B) on the new dataset(s)
-- [ ] Compare accuracy/behavior to original IMDB/COLLAB results — does the paper's claim hold?
-- [ ] Dig into failure/success cases (this is an explicit grading criterion, not optional polish)
+## 6. Test GIN on new data (Phase D)
 
-### Phase E — Deliverables
+- [ ] Run the same GIN pipeline on the new dataset(s)
+- [ ] Compare accuracy/behavior to the original IMDB/COLLAB results — does the paper's claim hold on new data?
+- [ ] Dig into failure/success cases — explicit grading criterion, not optional polish
+
+## 7. Deliverables (Phase E)
+
 - [ ] Project proposal draft (`proposal/`) — paper justification, feasibility, plan
 - [ ] Update presentation (`presentation/`)
 - [ ] Final report (`report/`) — full writeup with all results, code, new data, limitations
 - [ ] Clean up GitHub repo for submission (report, scripts, new data, README)
 
-## 3. Decisions log
+## 8. Decisions log
 
 | Date | Decision | Why |
 |---|---|---|
-| 2026-08-24 | Chose GIN over GCN/tabular candidates (XGBoost, CatBoost, SMOTE, SHAP, etc.) | Strongest theory-backed justification, cleanest "rebuild same recipe with new data" story via TMDb/OpenAlex/Reddit, CPU-feasible, task shape (graph classification, train/test split) simpler to redo than GCN's transductive node classification |
-| 2026-08-24 | Project structure created locally; git initialized locally, no remote yet | Setting up scaffolding before writing any code; will confirm with user before doing anything remote (creating/pushing to GitHub) |
-| 2026-08-24 | Skipping the "modern PyG reimplementation" fallback for now | Official repo already runs cleanly on current PyTorch/Python — no need for a fallback path unless something breaks later at full scale |
+| 2026-08-24 | Chose GIN over GCN and tabular candidates (XGBoost, CatBoost, SMOTE, SHAP, etc.) | Strongest theory-backed justification, cleanest "rebuild same recipe with new data" story via TMDb/OpenAlex/Reddit, CPU-feasible, task shape (graph classification, train/test split) simpler to redo than GCN's transductive node classification |
+| 2026-08-24 | Skipping the modern PyTorch Geometric reimplementation for now | Official repo already runs cleanly on current PyTorch/Python — no need for a fallback unless something breaks later at full scale |
 
-## 4. Open questions / things to verify
+## 9. Open questions
 
-- ~~Does the official repo actually run under Python 3.11?~~ **Resolved: yes, runs unmodified on PyTorch 2.13 / Python 3.11.**
 - TMDb API terms of use for scraping (rate limits, attribution requirements) — not yet checked
 - How large a REDDIT-BINARY/MULTI5K subset is CPU-feasible before training gets too slow — not yet tested at full scale
-- Exact paper hyperparameters per dataset (paper doesn't ship a config file, README says "refer to the paper") — need to pull from the paper's tables before running full replication, otherwise default args won't match reported numbers
 
-## 5. Next immediate step
+## 10. Next step
 
-**Paused here at the user's request** — everything is ready to run, nothing is currently executing. To resume: `cd replication && python run_gin.py --dataset MUTAG --epochs 350`, then log the result in the table below, then kick off PROTEINS/NCI1 next (expected similar runtime to MUTAG), then IMDB/COLLAB (with `--degree_as_tag`), then decide on REDDIT scope based on how slow a quick timing test shows it to be.
-
-## 6. Replication results
-
-Paper's Table 1 (GIN-0 variant, the simpler/better-performing of their two GIN variants), verified directly from the paper (via ar5iv HTML rendering of arXiv:1810.00826):
-
-| Dataset | # Graphs | # Classes | Avg # Nodes | Paper GIN-0 acc. | Our result | Notes |
-|---|---|---|---|---|---|---|
-| MUTAG | 188 | 2 | 17.9 | 89.4 ± 5.6% | ⏸️ paused | run started, stopped before completion at user's request — pipeline verified working, ready to resume |
-| PTC | 344 | 2 | 25.5 | 64.6 ± 7.0% | ⬜ not started | in dataset.zip, not yet planned above — add to Phase B if time allows |
-| PROTEINS | 1113 | 2 | 39.1 | 76.2 ± 2.8% | ⬜ not started | |
-| NCI1 | 4110 | 2 | 29.8 | 82.7 ± 1.7% | ⬜ not started | |
-| COLLAB | 5000 | 3 | 74.5 | 80.2 ± 1.9% | ⬜ not started | needs `--degree_as_tag` |
-| IMDB-BINARY | 1000 | 2 | 19.8 | 75.1 ± 5.1% | ⬜ not started | needs `--degree_as_tag` |
-| IMDB-MULTI | 1500 | 3 | 13.0 | 52.3 ± 2.8% | ⬜ not started | needs `--degree_as_tag` |
-| REDDIT-BINARY | 2000 | 2 | 429.6 | 92.4 ± 2.5% | ⬜ not started | large graphs, expect slow — avg 430 nodes vs. MUTAG's 18 |
-| REDDIT-MULTI5K | 5000 | 5 | 508.5 | 57.5 ± 1.5% | ⬜ not started | large graphs, expect slow |
-
-Paper's headline claim: GIN-0 matches or beats every baseline (WL subtree kernel, DCNN, PatchySAN, DGCNN, GraphSAGE, and weaker sum/mean/max-pooling GNN variants) on all 9 datasets.
+Run full 10-fold/350-epoch training on MUTAG (`cd replication && python run_gin.py --dataset MUTAG --epochs 350`), log the result, then move on to PROTEINS/NCI1.
