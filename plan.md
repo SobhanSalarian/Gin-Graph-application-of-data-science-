@@ -33,9 +33,16 @@ Last updated: 2026-08-24 (session 2)
 - [ ] Set up modern fallback path in `replication/modern-pyg/` using PyTorch Geometric — **not needed for now**, official repo works as-is; keep this as a backup/comparison item, not a blocker.
 
 ### Phase B — Replicate original results
-- [ ] Download/load TUDataset benchmarks: MUTAG, PROTEINS, NCI1 (bioinformatics) + IMDB-BINARY, IMDB-MULTI, COLLAB (social) at minimum; REDDIT-BINARY/MULTI5K if compute allows
-- [ ] Run GIN training on each (official repo path and/or PyG path)
-- [ ] Record accuracy per dataset, compare against paper's reported numbers
+- [x] Datasets already available (shipped in repo, see Phase A)
+- [x] Inspected `main.py`'s exact training protocol: Adam optimizer, `StepLR` halving the LR every 50 epochs, 350 epochs, 10-fold CV via `separate_data(graphs, seed, fold_idx)`. Default CLI hyperparameters (5 layers, hidden_dim 64, dropout 0.5, batch 32, iters_per_epoch 50, lr 0.01) match the paper's setup — README says these "are not the best performing" (paper does a small grid search per dataset), but they're a legitimate, representative point in that grid.
+- [x] **Found a quirk in the official code**: `main.py`'s `--filename` output option opens the file in `'w'` mode *every epoch*, so it only ever holds the last epoch's numbers, not a full curve — can't be used to reproduce the paper's "average the 10 validation curves, pick best epoch" model-selection procedure as-is.
+- [x] Wrote our own driver script `replication/run_gin.py` (ours, tracked in git — not part of the vendored repo) that: runs all 10 folds via subprocess, captures every epoch's (loss, train_acc, test_acc) from stdout, then reproduces the paper's exact selection rule — average the 10 test-accuracy curves epoch-by-epoch, pick the single epoch with the highest averaged accuracy, report mean ± std across folds at that epoch. Results saved incrementally to `results/logs/<dataset>_cv_curves.json` (survives interruption).
+- [x] Timed 20 epochs / 1 fold on MUTAG: 30s → full 350-epoch × 10-fold run estimated ~80-90 min for MUTAG. Test acc already 89.5% after just 20 epochs (fold 0) — matches paper's reported ~86-90% ballpark.
+- [ ] 🔄 **Full MUTAG run launched in background** (`replication/run_gin.py --dataset MUTAG --epochs 350`), log at `results/logs/MUTAG_run.log`, structured results at `results/logs/MUTAG_cv_curves.json`. Will log final mean±std here once done.
+- [ ] Repeat for PROTEINS, NCI1 (bioinformatics — similar graph sizes to MUTAG, should be comparable speed)
+- [ ] Repeat for IMDB-BINARY, IMDB-MULTI, COLLAB (social — need `--degree_as_tag` flag per README, since these have no node labels)
+- [ ] REDDIT-BINARY/MULTI5K if compute allows — graphs are much bigger (100s-1000s of nodes vs. MUTAG's ~18), expect this to be the slow one; may need to justify a reduced-epoch or subsampled run
+- [ ] Record accuracy per dataset in `## 6. Replication results` table below, compare against paper's reported numbers
 - [ ] Note any datasets/results we couldn't reproduce and why (resource limits, code rot, etc.) — instructions explicitly allow partial replication if justified
 - [ ] Bonus/investigation experiment: construct a small pair of non-isomorphic graphs that mean/max-pooling GNNs can't distinguish, show GIN can — direct test of the paper's theoretical claim
 
@@ -74,4 +81,19 @@ Last updated: 2026-08-24 (session 2)
 
 ## 5. Next immediate step
 
-Run full training (proper hyperparameters + full epoch count, all 10 CV folds) on MUTAG first (smallest/fastest dataset) to get a real number to compare against the paper's reported ~86-90% accuracy, then extend to PROTEINS/NCI1/IMDB/COLLAB. Log each dataset's result in a new `## 6. Replication results` table as they complete.
+MUTAG full run is training in the background. Once it finishes: log the result in the table below, then kick off PROTEINS/NCI1 next (expected similar runtime to MUTAG), then IMDB/COLLAB (with `--degree_as_tag`), then decide on REDDIT scope based on how slow a quick timing test shows it to be.
+
+## 6. Replication results
+
+| Dataset | Paper-reported acc. | Our result | Notes |
+|---|---|---|---|
+| MUTAG | ~86-90% (varies by hyperparameter setting used) | 🔄 running | full 10-fold/350-epoch run in progress |
+| PROTEINS | ~76% | ⬜ not started | |
+| NCI1 | ~82% | ⬜ not started | |
+| IMDB-BINARY | ~75-76% | ⬜ not started | needs `--degree_as_tag` |
+| IMDB-MULTI | ~52-53% | ⬜ not started | needs `--degree_as_tag` |
+| COLLAB | ~80% | ⬜ not started | needs `--degree_as_tag` |
+| REDDIT-BINARY | ~92% | ⬜ not started | large graphs, expect slow |
+| REDDIT-MULTI5K | ~57% | ⬜ not started | large graphs, expect slow |
+
+*Paper-reported figures above are from memory/general recall of the GIN paper's results table and should be double-checked against the actual paper table before being cited in the final report — flagged as a to-do, not yet verified against the primary source.*
