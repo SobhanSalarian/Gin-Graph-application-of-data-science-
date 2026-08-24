@@ -38,7 +38,7 @@ Last updated: 2026-08-24 (session 2)
 - [x] **Found a quirk in the official code**: `main.py`'s `--filename` output option opens the file in `'w'` mode *every epoch*, so it only ever holds the last epoch's numbers, not a full curve — can't be used to reproduce the paper's "average the 10 validation curves, pick best epoch" model-selection procedure as-is.
 - [x] Wrote our own driver script `replication/run_gin.py` (ours, tracked in git — not part of the vendored repo) that: runs all 10 folds via subprocess, captures every epoch's (loss, train_acc, test_acc) from stdout, then reproduces the paper's exact selection rule — average the 10 test-accuracy curves epoch-by-epoch, pick the single epoch with the highest averaged accuracy, report mean ± std across folds at that epoch. Results saved incrementally to `results/logs/<dataset>_cv_curves.json` (survives interruption).
 - [x] Timed 20 epochs / 1 fold on MUTAG: 30s → full 350-epoch × 10-fold run estimated ~80-90 min for MUTAG. Test acc already 89.5% after just 20 epochs (fold 0) — matches paper's reported ~86-90% ballpark.
-- [ ] ⏸️ **Full MUTAG run started, then stopped by user before completion** (wanted to review everything so far before letting a long background run continue). Pipeline (`replication/run_gin.py`) is written, tested, and confirmed working — just needs `python run_gin.py --dataset MUTAG --epochs 350` re-run when ready to resume. Partial/incomplete output files were deleted so nothing half-finished is left lying around.
+- [ ] 🔄 **Full MUTAG run resumed in background** (`replication/run_gin.py --dataset MUTAG --epochs 350`), log at `results/logs/MUTAG_run.log`, structured results at `results/logs/MUTAG_cv_curves.json`. Will log final mean±std here once done (~80-90 min estimated).
 - [ ] Repeat for PROTEINS, NCI1 (bioinformatics — similar graph sizes to MUTAG, should be comparable speed)
 - [ ] Repeat for IMDB-BINARY, IMDB-MULTI, COLLAB (social — need `--degree_as_tag` flag per README, since these have no node labels)
 - [ ] REDDIT-BINARY/MULTI5K if compute allows — graphs are much bigger (100s-1000s of nodes vs. MUTAG's ~18), expect this to be the slow one; may need to justify a reduced-epoch or subsampled run
@@ -81,7 +81,7 @@ Last updated: 2026-08-24 (session 2)
 
 ## 5. Next immediate step
 
-**Paused here at the user's request** — everything below is ready to run, nothing is currently executing. To resume: `cd replication && python run_gin.py --dataset MUTAG --epochs 350`, then log the result in the table below, then kick off PROTEINS/NCI1 next (expected similar runtime to MUTAG), then IMDB/COLLAB (with `--degree_as_tag`), then decide on REDDIT scope based on how slow a quick timing test shows it to be.
+MUTAG full run is training in the background again. Once it finishes: log the result in the table below, then kick off PROTEINS/NCI1 next (expected similar runtime to MUTAG), then IMDB/COLLAB (with `--degree_as_tag`), then decide on REDDIT scope based on how slow a quick timing test shows it to be.
 
 ## 6. Replication results
 
@@ -89,7 +89,7 @@ Paper's Table 1 (GIN-0 variant, the simpler/better-performing of their two GIN v
 
 | Dataset | # Graphs | # Classes | Avg # Nodes | Paper GIN-0 acc. | Our result | Notes |
 |---|---|---|---|---|---|---|
-| MUTAG | 188 | 2 | 17.9 | 89.4 ± 5.6% | ⏸️ paused | run started, stopped before completion at user's request — pipeline verified working, ready to resume |
+| MUTAG | 188 | 2 | 17.9 | 89.4 ± 5.6% | 🔄 running | full 10-fold/350-epoch run in progress (resumed) |
 | PTC | 344 | 2 | 25.5 | 64.6 ± 7.0% | ⬜ not started | in dataset.zip, not yet planned above — add to Phase B if time allows |
 | PROTEINS | 1113 | 2 | 39.1 | 76.2 ± 2.8% | ⬜ not started | |
 | NCI1 | 4110 | 2 | 29.8 | 82.7 ± 1.7% | ⬜ not started | |
