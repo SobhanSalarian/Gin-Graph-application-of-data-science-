@@ -63,11 +63,18 @@ Paper's headline claim: GIN-0 matches or beats every baseline (WL subtree kernel
 
 ## 5. New data creation (Phase C)
 
-- [ ] Confirm TMDb API terms/rate limits
-- [ ] Write scraping script(s) in `new_data/scraping/`
-- [ ] Build actor co-starring ego-network graphs, labeled by genre, from movies not in the original IMDB dataset (mirrors IMDB-BINARY/MULTI's original construction)
+**Original construction (Yanardag & Vishwanathan, "Deep Graph Kernels", KDD 2015 — the source of IMDB-BINARY/MULTI, which GIN's paper reuses as a benchmark):** nodes = actors, edge between two actors if they've co-starred in a movie, one graph per collaboration ego-network, labeled by genre (IMDB-BINARY: Action vs. Romance; IMDB-MULTI: Comedy vs. Romance vs. Sci-Fi).
+
+**Our mirrored construction, via the TMDb API:**
+- [x] Checked TMDb API terms: free API key via account signup (instant, no approval wait), ~40 req/s soft rate limit, requires attribution ("This product uses the TMDb API but is not endorsed or certified by TMDb") — fine for an academic project, just need to include the attribution line in the report/README
+- [x] Checked the GIN code's exact expected data format (from `util.py`) — plain text, one file per dataset: graph count header, then per graph `n_nodes graph_label` followed by one line per node (`tag degree neighbor1 neighbor2 ...`). Building the scraper to output this format directly means the new dataset drops straight into the existing pipeline for Phase D with **zero code changes**.
+- [x] Decided construction rule: for each target genre, pull movies released **2016-01-01 onward** (safely after the 2015 original dataset was built, guaranteeing no overlap), keep only movies whose genre list contains exactly one target genre (avoids ambiguous multi-genre labels), take each movie's top-billed cast (~20 actors) as that graph's nodes, and connect two actors with an edge if they co-appeared in *any* sampled movie of that genre — this reproduces the "ego-network of collaboration" structure rather than a trivial per-movie clique.
+- [x] Target scale: mirror the originals — ~500 movies/graphs per genre (1000 total for binary, 1500 for multi)
+- [ ] **Blocked on a TMDb API key** — needs a free account signup at themoviedb.org (Settings → API), which only the user can do. Script is written and ready to run the moment a key is available.
+- [x] Wrote `new_data/scraping/build_tmdb_dataset.py` — fetches genre-filtered movies + cast via TMDb, builds the collaboration graphs, writes both the TU-format dataset files (`IMDBBINARY-NEW`, `IMDBMULTI-NEW`) and a companion metadata JSON (movie titles/actor names per graph, for later EDA/report writeup)
+- [ ] Run the scraper once a key is available, sanity-check output (graph count, average node count vs. original ~19.8/13.0)
 - [ ] Stretch: second new dataset via OpenAlex (COLLAB-style co-authorship) and/or Reddit API (REDDIT-style), for a second independent test
-- [ ] Document new data quality/limitations vs. the original (size, class balance, etc.)
+- [ ] Document new data quality/limitations vs. the original (size, class balance, single-genre-only filtering reduces pool size, etc.)
 
 ## 6. Test GIN on new data (Phase D)
 
