@@ -85,15 +85,18 @@ MUTAG full run is training in the background. Once it finishes: log the result i
 
 ## 6. Replication results
 
-| Dataset | Paper-reported acc. | Our result | Notes |
-|---|---|---|---|
-| MUTAG | ~86-90% (varies by hyperparameter setting used) | 🔄 running | full 10-fold/350-epoch run in progress |
-| PROTEINS | ~76% | ⬜ not started | |
-| NCI1 | ~82% | ⬜ not started | |
-| IMDB-BINARY | ~75-76% | ⬜ not started | needs `--degree_as_tag` |
-| IMDB-MULTI | ~52-53% | ⬜ not started | needs `--degree_as_tag` |
-| COLLAB | ~80% | ⬜ not started | needs `--degree_as_tag` |
-| REDDIT-BINARY | ~92% | ⬜ not started | large graphs, expect slow |
-| REDDIT-MULTI5K | ~57% | ⬜ not started | large graphs, expect slow |
+Paper's Table 1 (GIN-0 variant, the simpler/better-performing of their two GIN variants), verified directly from the paper (via ar5iv HTML rendering of arXiv:1810.00826):
 
-*Paper-reported figures above are from memory/general recall of the GIN paper's results table and should be double-checked against the actual paper table before being cited in the final report — flagged as a to-do, not yet verified against the primary source.*
+| Dataset | # Graphs | # Classes | Avg # Nodes | Paper GIN-0 acc. | Our result | Notes |
+|---|---|---|---|---|---|---|
+| MUTAG | 188 | 2 | 17.9 | 89.4 ± 5.6% | 🔄 running | full 10-fold/350-epoch run in progress |
+| PTC | 344 | 2 | 25.5 | 64.6 ± 7.0% | ⬜ not started | in dataset.zip, not yet planned above — add to Phase B if time allows |
+| PROTEINS | 1113 | 2 | 39.1 | 76.2 ± 2.8% | ⬜ not started | |
+| NCI1 | 4110 | 2 | 29.8 | 82.7 ± 1.7% | ⬜ not started | |
+| COLLAB | 5000 | 3 | 74.5 | 80.2 ± 1.9% | ⬜ not started | needs `--degree_as_tag` |
+| IMDB-BINARY | 1000 | 2 | 19.8 | 75.1 ± 5.1% | ⬜ not started | needs `--degree_as_tag` |
+| IMDB-MULTI | 1500 | 3 | 13.0 | 52.3 ± 2.8% | ⬜ not started | needs `--degree_as_tag` |
+| REDDIT-BINARY | 2000 | 2 | 429.6 | 92.4 ± 2.5% | ⬜ not started | large graphs, expect slow — avg 430 nodes vs. MUTAG's 18 |
+| REDDIT-MULTI5K | 5000 | 5 | 508.5 | 57.5 ± 1.5% | ⬜ not started | large graphs, expect slow |
+
+Paper's headline claim: GIN-0 matches or beats every baseline (WL subtree kernel, DCNN, PatchySAN, DGCNN, GraphSAGE, and weaker sum/mean/max-pooling GNN variants) on all 9 datasets.
