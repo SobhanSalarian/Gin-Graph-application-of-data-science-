@@ -37,9 +37,12 @@ Last updated: 2026-08-25
 
 **Scope narrowed to IMDB-BINARY and IMDB-MULTI only** — these are the two original datasets we have matching new (scraped) data for, so replicating exactly these two gives a direct, apples-to-apples chain for Phase D: paper's original result → our replication of the original → our result on the new scraped data. The other 7 datasets (MUTAG, PTC, PROTEINS, NCI1, COLLAB, REDDIT-BINARY, REDDIT-MULTI5K) are dropped from the plan — no matching new data was built for them, so replicating them wouldn't feed into the new-data comparison that's the point of this project. This is a deliberate scoping choice, not a resource shortfall, and will be stated as such in the report.
 
-- [ ] Run full 10-fold/350-epoch training on IMDB-BINARY (needs `--degree_as_tag`, no node labels)
-- [ ] Run full 10-fold/350-epoch training on IMDB-MULTI (needs `--degree_as_tag`)
-- [ ] Log both results into the results table below, compare against paper's reported numbers
+**Compute plan:** local CPU timing showed IMDB-BINARY/MULTI take ~3.5 hrs each at full spec (350 epochs × 10 folds) — too slow to run locally for 4 datasets (2 original + 2 new). Moved execution to **Google Colab (T4 GPU)** instead, which the user has access to.
+
+- [x] Confirmed the official `main.py` already auto-detects CUDA (`torch.device("cuda:0")` if available) — no code changes needed to run on GPU
+- [x] Built `notebooks/gin_colab_replication.ipynb` — self-contained notebook: clones the official repo, installs deps, lets the user upload `IMDBBINARY-NEW.txt`/`IMDBMULTI-NEW.txt`, writes a Colab-local copy of the CV driver (same logic as `replication/run_gin.py`), then runs all 4 datasets (IMDB-BINARY, IMDB-MULTI, IMDBBINARY-NEW, IMDBMULTI-NEW) back to back at full spec, ending in one copy-pasteable summary block
+- [ ] User runs the notebook cell-by-cell on Colab T4, reports back the final summary block
+- [ ] Log all 4 results (2 original + 2 new) into the results table below, compare against paper's reported numbers
 - [ ] Investigation experiment: construct a small pair of non-isomorphic graphs that mean/max-pooling GNNs can't distinguish, show GIN can — a direct, hands-on test of the paper's theoretical claim
 
 ## 4. Replication results
@@ -48,8 +51,10 @@ Paper's Table 1 (GIN-0 variant — the simpler, better-performing of their two G
 
 | Dataset | # Graphs | # Classes | Avg # Nodes | Paper GIN-0 acc. | Our result |
 |---|---|---|---|---|---|
-| IMDB-BINARY | 1000 | 2 | 19.8 | 75.1 ± 5.1% | — |
-| IMDB-MULTI | 1500 | 3 | 13.0 | 52.3 ± 2.8% | — |
+| IMDB-BINARY (original) | 1000 | 2 | 19.8 | 75.1 ± 5.1% | — |
+| IMDB-MULTI (original) | 1500 | 3 | 13.0 | 52.3 ± 2.8% | — |
+| IMDBBINARY-NEW (scraped) | 996 | 2 | 19.2 | n/a — new data | — |
+| IMDBMULTI-NEW (scraped) | 1492 | 3 | 18.9 | n/a — new data | — |
 
 Paper's headline claim: GIN-0 matches or beats every baseline (WL subtree kernel, DCNN, PatchySAN, DGCNN, GraphSAGE, weaker sum/mean/max-pooling GNN variants) on all 9 of its benchmark datasets — IMDB-BINARY and IMDB-MULTI included.
 
@@ -74,7 +79,7 @@ Paper's headline claim: GIN-0 matches or beats every baseline (WL subtree kernel
 
 ## 6. Test GIN on new data (Phase D)
 
-- [ ] Run the same GIN pipeline on the new dataset(s)
+- [x] Same GIN pipeline runs on the new dataset(s) automatically as part of the Colab notebook (section 3) — no separate step needed, all 4 datasets run in one pass
 - [ ] Compare accuracy/behavior to our IMDB-BINARY/IMDB-MULTI replication results — does the paper's claim hold on new data?
 - [ ] Dig into failure/success cases — explicit grading criterion, not optional polish
 
@@ -92,12 +97,12 @@ Paper's headline claim: GIN-0 matches or beats every baseline (WL subtree kernel
 | 2026-08-24 | Chose GIN over GCN and tabular candidates (XGBoost, CatBoost, SMOTE, SHAP, etc.) | Strongest theory-backed justification, cleanest "rebuild same recipe with new data" story via TMDb/OpenAlex/Reddit, CPU-feasible, task shape (graph classification, train/test split) simpler to redo than GCN's transductive node classification |
 | 2026-08-24 | Skipping the modern PyTorch Geometric reimplementation for now | Official repo already runs cleanly on current PyTorch/Python — no need for a fallback unless something breaks later at full scale |
 | 2026-08-25 | Narrowed Phase B replication to IMDB-BINARY and IMDB-MULTI only, dropped the other 7 benchmark datasets from the plan | Only these two have matching scraped new data (`IMDBBINARY-NEW`, `IMDBMULTI-NEW`), so replicating exactly these two directly feeds the Phase D comparison instead of spreading effort across datasets that don't connect to the new-data test |
+| 2026-08-25 | Moved full-spec training runs (350 epochs × 10 folds) from local CPU to Google Colab (T4 GPU) via a self-contained notebook | Local CPU timing showed ~3.5 hrs/dataset × 4 datasets ≈ 6-7 hrs total — too slow; user has Colab GPU access, and the official code already supports CUDA with zero changes |
 
 ## 9. Open questions
 
-- TMDb API terms of use for scraping (rate limits, attribution requirements) — not yet checked
-- How large a REDDIT-BINARY/MULTI5K subset is CPU-feasible before training gets too slow — not yet tested at full scale
+- None currently blocking — waiting on Colab run results
 
 ## 10. Next step
 
-Run full 10-fold/350-epoch training on IMDB-BINARY (`cd replication && python run_gin.py --dataset IMDBBINARY --epochs 350 --extra --degree_as_tag`), then IMDB-MULTI the same way, log both results, then move to Phase D (same pipeline on `IMDBBINARY-NEW`/`IMDBMULTI-NEW`).
+User runs `notebooks/gin_colab_replication.ipynb` on Colab (T4 GPU), cell by cell, and reports back the final summary block (mean ± std accuracy for all 4 datasets). Once that's in: log results in section 4's table, then move to comparing/discussing them for Phase D and the investigation experiment.
