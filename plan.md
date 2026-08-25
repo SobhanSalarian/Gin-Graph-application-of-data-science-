@@ -41,8 +41,8 @@ Last updated: 2026-08-25
 
 - [x] Confirmed the official `main.py` already auto-detects CUDA (`torch.device("cuda:0")` if available) — no code changes needed to run on GPU
 - [x] Built `notebooks/gin_colab_replication.ipynb` — self-contained notebook: clones the official repo, installs deps, lets the user upload `IMDBBINARY-NEW.txt`/`IMDBMULTI-NEW.txt`, writes a Colab-local copy of the CV driver (same logic as `replication/run_gin.py`), then runs all 4 datasets (IMDB-BINARY, IMDB-MULTI, IMDBBINARY-NEW, IMDBMULTI-NEW) back to back at full spec, ending in one copy-pasteable summary block
-- [ ] User runs the notebook cell-by-cell on Colab T4, reports back the final summary block
-- [ ] Log all 4 results (2 original + 2 new) into the results table below, compare against paper's reported numbers
+- [x] User ran the notebook cell-by-cell on Colab T4, reported back the final summary block
+- [x] Logged all 4 results (2 original + 2 new) into the results table below, compared against paper's reported numbers
 - [ ] Investigation experiment: construct a small pair of non-isomorphic graphs that mean/max-pooling GNNs can't distinguish, show GIN can — a direct, hands-on test of the paper's theoretical claim
 
 ## 4. Replication results
@@ -51,12 +51,15 @@ Paper's Table 1 (GIN-0 variant — the simpler, better-performing of their two G
 
 | Dataset | # Graphs | # Classes | Avg # Nodes | Paper GIN-0 acc. | Our result |
 |---|---|---|---|---|---|
-| IMDB-BINARY (original) | 1000 | 2 | 19.8 | 75.1 ± 5.1% | ⬜ pending re-run — Colab run skipped/failed for this one |
-| IMDB-MULTI (original) | 1500 | 3 | 13.0 | 52.3 ± 2.8% | ⬜ pending re-run — Colab run skipped/failed for this one |
+| IMDB-BINARY (original) | 1000 | 2 | 19.8 | 75.1 ± 5.1% | **74.4 ± 4.1%** (best epoch 80, ~50.0 min on T4) |
+| IMDB-MULTI (original) | 1500 | 3 | 13.0 | 52.3 ± 2.8% | **50.5 ± 2.3%** (best epoch 213, ~52.9 min on T4) |
 | IMDBBINARY-NEW (scraped) | 996 | 2 | 19.2 | n/a — new data | **56.1 ± 2.2%** (best epoch 136, 53.0 min on T4) |
 | IMDBMULTI-NEW (scraped) | 1492 | 3 | 18.9 | n/a — new data | **40.9 ± 2.1%** (best epoch 265, 56.1 min on T4) |
 
-**Early read:** both new-data results land well below the *paper's* published numbers (56.1% vs. 75.1% for binary; 40.9% vs. 52.3% for multi) — roughly a 12-15 point drop in both cases. Plausible explanation, tying back to the data-quality note in section 5: our graphs are far denser/closer-to-clique (avg ~178 edges vs. paper's ~96.5) than the originals, which flattens a lot of the structural signal GIN relies on to tell classes apart — with `--degree_as_tag` as the only node feature, a near-complete graph gives the model much less to work with. This needs the original-data re-run below to confirm it's the *data* causing the gap and not some other run difference (seed, environment, etc.).
+**Result — replication succeeded, new-data test shows a real drop:**
+- **Replication of the original datasets is a clean success.** IMDB-BINARY: 74.4% vs. paper's 75.1% (well within the paper's own ±5.1% std). IMDB-MULTI: 50.5% vs. paper's 52.3% (within ~1 std of the paper's ±2.8%). Same code, same protocol, same hyperparameters — reproduces the paper closely on both original benchmarks.
+- **Applying the identical pipeline to our new scraped data shows a real, isolated drop**, now confirmed against *our own* replication (not just the paper's published number, which could differ for other reasons): IMDBBINARY-NEW is **18.3 points below** our own IMDB-BINARY replication (56.1% vs. 74.4%); IMDBMULTI-NEW is **9.6 points below** our own IMDB-MULTI replication (40.9% vs. 50.5%). Since the code, hyperparameters, and evaluation protocol are all identical between each original/new pair, this gap isolates to the *data itself*.
+- **Leading explanation**, consistent with the data-quality note in section 5: our new graphs are far denser/closer-to-clique (avg ~178 edges vs. the originals' ~96.5) because edges only form from actor overlap *within* our sampled movie pool, so most movies come out as near-complete cliques on their 20-actor cast. A near-clique carries much less distinguishing topological structure than the originals' sparser ego-networks — and since node features here are only `--degree_as_tag` (no richer attributes), GIN has substantially less signal to work with. This is the natural next thing to dig into for Phase D/the final report — e.g. checking whether misclassifications correlate with how clique-like a given graph is.
 
 Paper's headline claim: GIN-0 matches or beats every baseline (WL subtree kernel, DCNN, PatchySAN, DGCNN, GraphSAGE, weaker sum/mean/max-pooling GNN variants) on all 9 of its benchmark datasets — IMDB-BINARY and IMDB-MULTI included.
 
@@ -82,8 +85,8 @@ Paper's headline claim: GIN-0 matches or beats every baseline (WL subtree kernel
 ## 6. Test GIN on new data (Phase D)
 
 - [x] Same GIN pipeline runs on the new dataset(s) automatically as part of the Colab notebook (section 3) — no separate step needed, all 4 datasets run in one pass
-- [ ] Compare accuracy/behavior to our IMDB-BINARY/IMDB-MULTI replication results — does the paper's claim hold on new data?
-- [ ] Dig into failure/success cases — explicit grading criterion, not optional polish
+- [x] Compared accuracy to our own IMDB-BINARY/IMDB-MULTI replication results (not just the paper's published numbers) — **the paper's claim does not fully hold on new data**: -18.3 points on binary, -9.6 points on multi, isolated to the data since code/hyperparameters/protocol are identical. See section 4 for the full result and leading explanation (graph density/clique structure).
+- [ ] Dig into failure/success cases in more depth — explicit grading criterion, not optional polish. Next: check whether individual misclassified new-data graphs correlate with how clique-like they are (e.g. edge density per graph vs. correct/incorrect prediction)
 
 ## 7. Deliverables (Phase E)
 
@@ -103,8 +106,12 @@ Paper's headline claim: GIN-0 matches or beats every baseline (WL subtree kernel
 
 ## 9. Open questions
 
-- None currently blocking — waiting on Colab run results
+- None currently blocking
 
 ## 10. Next step
 
-User runs `notebooks/gin_colab_replication.ipynb` on Colab (T4 GPU), cell by cell, and reports back the final summary block (mean ± std accuracy for all 4 datasets). Once that's in: log results in section 4's table, then move to comparing/discussing them for Phase D and the investigation experiment.
+All 4 full training runs are done and logged (section 4). Two things left before this phase is wrapped up:
+1. Dig deeper into *why* accuracy drops on the new data — check whether misclassified new-data graphs correlate with edge density/clique-ness (data already available in the `_metadata.json` files + saved CV curves)
+2. Run the investigation experiment: build a small pair of non-isomorphic graphs that mean/max-pooling GNNs can't tell apart, confirm GIN can — a direct test of the paper's theoretical claim
+
+After that: move to Phase E (proposal, presentation, report).
