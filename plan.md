@@ -35,12 +35,11 @@ Last updated: 2026-08-25
 
 ## 3. Replication plan (Phase B)
 
-- [ ] Run full 10-fold/350-epoch training on MUTAG
-- [ ] Run PROTEINS, NCI1 (bioinformatics — similar graph sizes to MUTAG, comparable runtime expected)
-- [ ] Run IMDB-BINARY, IMDB-MULTI, COLLAB (social — need `--degree_as_tag` flag, no node labels)
-- [ ] Run REDDIT-BINARY, REDDIT-MULTI5K if compute allows (much larger graphs — may need a reduced-epoch or subsampled run, to be justified in the report if so)
-- [ ] Log every dataset's result into the results table below
-- [ ] Note any datasets/results that don't reproduce cleanly and why (resource limits, etc. — explicitly allowed by the assignment if justified)
+**Scope narrowed to IMDB-BINARY and IMDB-MULTI only** — these are the two original datasets we have matching new (scraped) data for, so replicating exactly these two gives a direct, apples-to-apples chain for Phase D: paper's original result → our replication of the original → our result on the new scraped data. The other 7 datasets (MUTAG, PTC, PROTEINS, NCI1, COLLAB, REDDIT-BINARY, REDDIT-MULTI5K) are dropped from the plan — no matching new data was built for them, so replicating them wouldn't feed into the new-data comparison that's the point of this project. This is a deliberate scoping choice, not a resource shortfall, and will be stated as such in the report.
+
+- [ ] Run full 10-fold/350-epoch training on IMDB-BINARY (needs `--degree_as_tag`, no node labels)
+- [ ] Run full 10-fold/350-epoch training on IMDB-MULTI (needs `--degree_as_tag`)
+- [ ] Log both results into the results table below, compare against paper's reported numbers
 - [ ] Investigation experiment: construct a small pair of non-isomorphic graphs that mean/max-pooling GNNs can't distinguish, show GIN can — a direct, hands-on test of the paper's theoretical claim
 
 ## 4. Replication results
@@ -49,17 +48,10 @@ Paper's Table 1 (GIN-0 variant — the simpler, better-performing of their two G
 
 | Dataset | # Graphs | # Classes | Avg # Nodes | Paper GIN-0 acc. | Our result |
 |---|---|---|---|---|---|
-| MUTAG | 188 | 2 | 17.9 | 89.4 ± 5.6% | — |
-| PTC | 344 | 2 | 25.5 | 64.6 ± 7.0% | — |
-| PROTEINS | 1113 | 2 | 39.1 | 76.2 ± 2.8% | — |
-| NCI1 | 4110 | 2 | 29.8 | 82.7 ± 1.7% | — |
-| COLLAB | 5000 | 3 | 74.5 | 80.2 ± 1.9% | — |
 | IMDB-BINARY | 1000 | 2 | 19.8 | 75.1 ± 5.1% | — |
 | IMDB-MULTI | 1500 | 3 | 13.0 | 52.3 ± 2.8% | — |
-| REDDIT-BINARY | 2000 | 2 | 429.6 | 92.4 ± 2.5% | — |
-| REDDIT-MULTI5K | 5000 | 5 | 508.5 | 57.5 ± 1.5% | — |
 
-Paper's headline claim: GIN-0 matches or beats every baseline (WL subtree kernel, DCNN, PatchySAN, DGCNN, GraphSAGE, weaker sum/mean/max-pooling GNN variants) on all 9 datasets.
+Paper's headline claim: GIN-0 matches or beats every baseline (WL subtree kernel, DCNN, PatchySAN, DGCNN, GraphSAGE, weaker sum/mean/max-pooling GNN variants) on all 9 of its benchmark datasets — IMDB-BINARY and IMDB-MULTI included.
 
 ## 5. New data creation (Phase C)
 
@@ -83,7 +75,7 @@ Paper's headline claim: GIN-0 matches or beats every baseline (WL subtree kernel
 ## 6. Test GIN on new data (Phase D)
 
 - [ ] Run the same GIN pipeline on the new dataset(s)
-- [ ] Compare accuracy/behavior to the original IMDB/COLLAB results — does the paper's claim hold on new data?
+- [ ] Compare accuracy/behavior to our IMDB-BINARY/IMDB-MULTI replication results — does the paper's claim hold on new data?
 - [ ] Dig into failure/success cases — explicit grading criterion, not optional polish
 
 ## 7. Deliverables (Phase E)
@@ -99,6 +91,7 @@ Paper's headline claim: GIN-0 matches or beats every baseline (WL subtree kernel
 |---|---|---|
 | 2026-08-24 | Chose GIN over GCN and tabular candidates (XGBoost, CatBoost, SMOTE, SHAP, etc.) | Strongest theory-backed justification, cleanest "rebuild same recipe with new data" story via TMDb/OpenAlex/Reddit, CPU-feasible, task shape (graph classification, train/test split) simpler to redo than GCN's transductive node classification |
 | 2026-08-24 | Skipping the modern PyTorch Geometric reimplementation for now | Official repo already runs cleanly on current PyTorch/Python — no need for a fallback unless something breaks later at full scale |
+| 2026-08-25 | Narrowed Phase B replication to IMDB-BINARY and IMDB-MULTI only, dropped the other 7 benchmark datasets from the plan | Only these two have matching scraped new data (`IMDBBINARY-NEW`, `IMDBMULTI-NEW`), so replicating exactly these two directly feeds the Phase D comparison instead of spreading effort across datasets that don't connect to the new-data test |
 
 ## 9. Open questions
 
@@ -107,4 +100,4 @@ Paper's headline claim: GIN-0 matches or beats every baseline (WL subtree kernel
 
 ## 10. Next step
 
-Run full 10-fold/350-epoch training on MUTAG (`cd replication && python run_gin.py --dataset MUTAG --epochs 350`), log the result, then move on to PROTEINS/NCI1.
+Run full 10-fold/350-epoch training on IMDB-BINARY (`cd replication && python run_gin.py --dataset IMDBBINARY --epochs 350 --extra --degree_as_tag`), then IMDB-MULTI the same way, log both results, then move to Phase D (same pipeline on `IMDBBINARY-NEW`/`IMDBMULTI-NEW`).
