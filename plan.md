@@ -51,10 +51,12 @@ Paper's Table 1 (GIN-0 variant — the simpler, better-performing of their two G
 
 | Dataset | # Graphs | # Classes | Avg # Nodes | Paper GIN-0 acc. | Our result |
 |---|---|---|---|---|---|
-| IMDB-BINARY (original) | 1000 | 2 | 19.8 | 75.1 ± 5.1% | — |
-| IMDB-MULTI (original) | 1500 | 3 | 13.0 | 52.3 ± 2.8% | — |
-| IMDBBINARY-NEW (scraped) | 996 | 2 | 19.2 | n/a — new data | — |
-| IMDBMULTI-NEW (scraped) | 1492 | 3 | 18.9 | n/a — new data | — |
+| IMDB-BINARY (original) | 1000 | 2 | 19.8 | 75.1 ± 5.1% | ⬜ pending re-run — Colab run skipped/failed for this one |
+| IMDB-MULTI (original) | 1500 | 3 | 13.0 | 52.3 ± 2.8% | ⬜ pending re-run — Colab run skipped/failed for this one |
+| IMDBBINARY-NEW (scraped) | 996 | 2 | 19.2 | n/a — new data | **56.1 ± 2.2%** (best epoch 136, 53.0 min on T4) |
+| IMDBMULTI-NEW (scraped) | 1492 | 3 | 18.9 | n/a — new data | **40.9 ± 2.1%** (best epoch 265, 56.1 min on T4) |
+
+**Early read:** both new-data results land well below the *paper's* published numbers (56.1% vs. 75.1% for binary; 40.9% vs. 52.3% for multi) — roughly a 12-15 point drop in both cases. Plausible explanation, tying back to the data-quality note in section 5: our graphs are far denser/closer-to-clique (avg ~178 edges vs. paper's ~96.5) than the originals, which flattens a lot of the structural signal GIN relies on to tell classes apart — with `--degree_as_tag` as the only node feature, a near-complete graph gives the model much less to work with. This needs the original-data re-run below to confirm it's the *data* causing the gap and not some other run difference (seed, environment, etc.).
 
 Paper's headline claim: GIN-0 matches or beats every baseline (WL subtree kernel, DCNN, PatchySAN, DGCNN, GraphSAGE, weaker sum/mean/max-pooling GNN variants) on all 9 of its benchmark datasets — IMDB-BINARY and IMDB-MULTI included.
 
