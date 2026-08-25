@@ -73,8 +73,9 @@ Paper's headline claim: GIN-0 matches or beats every baseline (WL subtree kernel
 - [x] TMDb API key obtained (kept out of git — passed via `TMDB_API_KEY` environment variable only, never committed)
 - [x] Wrote `new_data/scraping/build_tmdb_dataset.py` — fetches genre-filtered movies + cast via TMDb, builds the collaboration graphs, writes both the TU-format dataset files (`IMDBBINARY-NEW`, `IMDBMULTI-NEW`) and a companion metadata JSON (movie titles/actor names per graph, for later EDA/report writeup)
 - [x] Small test run (5 movies/genre) passed — correct TU-format output, sensible real movies/actors in metadata, graph structure as expected
-- [ ] Full-scale scrape running: `IMDBBINARY-NEW` (500 movies × 2 genres) in progress, `IMDBMULTI-NEW` (500 × 3 genres) queued next
-- [ ] Sanity-check final output (graph count, average node count vs. original ~19.8/13.0)
+- [x] `IMDBBINARY-NEW` scraped: **996 graphs** (500 Action, 496 Romance — a handful of Romance movies had <5 billed cast and were skipped), avg **19.2 nodes/graph** (original IMDB-BINARY: 19.8 — very close match), avg 177.8 edges/graph (original: 96.5 — ours is denser; likely because most graphs come out near a full clique at cast_size=20, since actor overlap *across* different sampled movies is fairly rare relative to same-movie co-billing. Noted as a data-quality difference to discuss in the report.)
+- [ ] `IMDBMULTI-NEW` scrape running (500 movies × 3 genres)
+- [ ] Sanity-check `IMDBMULTI-NEW` output once done, same way as above
 - [ ] Stretch: second new dataset via OpenAlex (COLLAB-style co-authorship) and/or Reddit API (REDDIT-style), for a second independent test
 - [ ] Document new data quality/limitations vs. the original (size, class balance, single-genre-only filtering reduces pool size, etc.)
 
