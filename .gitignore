@@ -6,6 +6,5 @@ venv/
 *.pth
 replication/official-repo/
 new_data/raw/
-new_data/processed/
 results/logs/*.log
 .env
