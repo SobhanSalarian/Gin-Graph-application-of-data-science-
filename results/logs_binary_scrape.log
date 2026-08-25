@@ -1,0 +1,6 @@
+  [Action] found 500 candidate movies (wanted 500)
+  [Romance] found 500 candidate movies (wanted 500)
+
+Wrote 996 graphs to E:\Session2 - 2026\App Of Data science\Assign1 temp4\new_data\processed\IMDBBINARY-NEW
+Avg nodes: 19.2, avg edges: 177.8
+Label counts: {'Action': 500, 'Romance': 496}

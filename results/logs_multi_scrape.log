@@ -1,0 +1,7 @@
+  [Comedy] found 500 candidate movies (wanted 500)
+  [Romance] found 500 candidate movies (wanted 500)
+  [Science Fiction] found 500 candidate movies (wanted 500)
+
+Wrote 1492 graphs to E:\Session2 - 2026\App Of Data science\Assign1 temp4\new_data\processed\IMDBMULTI-NEW
+Avg nodes: 18.9, avg edges: 174.1
+Label counts: {'Comedy': 499, 'Romance': 493, 'Science Fiction': 500}
