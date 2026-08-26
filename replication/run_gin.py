@@ -55,11 +55,13 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--dataset", required=True)
     ap.add_argument("--epochs", type=int, default=350)
+    ap.add_argument("--tag", default="", help="suffix for the output filename, e.g. 'graphsage', so runs with different --extra flags on the same dataset don't overwrite each other")
     ap.add_argument("--extra", nargs=argparse.REMAINDER, default=[])
     args = ap.parse_args()
 
     RESULTS_DIR.mkdir(parents=True, exist_ok=True)
-    out_path = RESULTS_DIR / f"{args.dataset}_cv_curves.json"
+    suffix = f"_{args.tag}" if args.tag else ""
+    out_path = RESULTS_DIR / f"{args.dataset}{suffix}_cv_curves.json"
 
     all_folds = []
     t0 = time.time()
