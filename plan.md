@@ -1,6 +1,6 @@
 # Project Plan — Replicating GIN (Graph Isomorphism Network)
 
-Last updated: 2026-08-25
+Last updated: 2026-08-26
 
 ---
 
@@ -45,6 +45,17 @@ Last updated: 2026-08-25
 - [x] Logged all 4 results (2 original + 2 new) into the results table below, compared against paper's reported numbers
 - [ ] Investigation experiment: construct a small pair of non-isomorphic graphs that mean/max-pooling GNNs can't distinguish, show GIN can — a direct, hands-on test of the paper's theoretical claim
 
+## 3a. Compute migration: Colab → university GPU server
+
+**Why:** Colab's own GPU quota was hit partway through the GraphSAGE runs (Colab enforces a usage cap independent of whether the GPU is actually busy). The user has SSH access to a university lab machine (`aai-lab`) with a dedicated RTX 6000 Ada (49GB VRAM) — no such quota, and it's not shared via any job scheduler (plain SSH box), so runs go straight onto the GPU. Only real constraint is other lab members' own jobs contending for the same card, which isn't currently happening.
+
+- [x] Pushed the local repo to a new GitHub remote (`github.com/SobhanSalarianCognitivo/Gin-Graph`, public) so the server can `git clone` it directly — repo had no remote until now
+- [x] Wrote `replication/setup_server.sh` (one-time env setup: clones+patches the official repo, extracts its bundled `dataset.zip`, creates a venv, installs a CUDA-matched PyTorch + deps) and `replication/run_all_server.sh` (runs all 4 datasets through GIN then GraphSAGE, full spec, logging to `results/logs/run_all.log`)
+- [x] Added `--tag` to `replication/run_gin.py` so a GraphSAGE run doesn't overwrite the GIN run's output file for the same dataset (real collision that existed before, only mattered once both were being run back-to-back outside separate Colab sessions)
+- [x] Fixed two gaps only visible on a clean server venv (both invisible before since Colab/local Python already had the packages/data): official repo's `requirements.txt` is missing `scikit-learn` (needed by `util.py`'s `StratifiedKFold`); the 9 bundled benchmark datasets live inside `official-repo/dataset.zip` and need extracting, not just cloning
+- [x] SSH key-based auth set up between this machine and the server (added local pubkey to server's `authorized_keys`) so the whole setup/launch/monitoring loop runs without manual steps
+- [x] Full run launched inside a detached `tmux` session (survives SSH disconnects) on 2026-08-26; progress tracked via periodic snapshots into `results/server_progress.log`
+
 ## 4. Replication results
 
 Paper's Table 1 (GIN-0 variant — the simpler, better-performing of their two GIN variants), verified directly from the paper:
@@ -62,6 +73,8 @@ Paper's Table 1 (GIN-0 variant — the simpler, better-performing of their two G
 - **Leading explanation**, consistent with the data-quality note in section 5: our new graphs are far denser/closer-to-clique (avg ~178 edges vs. the originals' ~96.5) because edges only form from actor overlap *within* our sampled movie pool, so most movies come out as near-complete cliques on their 20-actor cast. A near-clique carries much less distinguishing topological structure than the originals' sparser ego-networks — and since node features here are only `--degree_as_tag` (no richer attributes), GIN has substantially less signal to work with. This is the natural next thing to dig into for Phase D/the final report — e.g. checking whether misclassifications correlate with how clique-like a given graph is.
 
 Paper's headline claim: GIN-0 matches or beats every baseline (WL subtree kernel, DCNN, PatchySAN, DGCNN, GraphSAGE, weaker sum/mean/max-pooling GNN variants) on all 9 of its benchmark datasets — IMDB-BINARY and IMDB-MULTI included.
+
+**Cross-hardware reproducibility check (2026-08-26):** the same GIN pipeline was independently re-run end-to-end on the uni GPU server (section 3a) as part of the GraphSAGE batch job. Results landed within ~1 point of the original Colab run on all 4 datasets — IMDB-BINARY 73.9% (vs. 74.4% on Colab), IMDB-MULTI 50.6% (vs. 50.5%), IMDBBINARY-NEW 55.9% (vs. 56.1%), IMDBMULTI-NEW 41.0% (vs. 40.9%) — good evidence the result isn't an artifact of one GPU/run. Table above keeps the original Colab numbers as the logged result since they were already analyzed in depth; the server re-run is corroborating evidence, not a replacement.
 
 ## 5. New data creation (Phase C)
 
@@ -103,20 +116,26 @@ Question this answers: does GraphSAGE's ~2-3 point gap behind GIN on the origina
 
 - [x] Confirmed locally (small smoke-test runs, not full spec) that the flag combination runs cleanly on both an original dataset (IMDB-BINARY) and a new dataset (IMDBBINARY-NEW) — no errors, ready for a full Colab run
 - [x] Built `notebooks/graphsage_colab_comparison.ipynb` — same structure as the GIN notebook (clone repo, upload new datasets, run all 4 datasets, print summary), driver script tags output filenames with `_graphsage` so results don't collide with the earlier GIN run's files
-- [x] **Bug found and fixed:** the official code's max-pooling path (`models/graphcnn.py`, `__preprocess_neighbors_maxpool`) builds an index tensor (`padded_neighbor_list`) but never moves it to GPU — unlike the working sum/average-pooling path a few lines below, which correctly does `Adj_block.to(self.device)`. On GPU this meant every training iteration indexed a CUDA tensor with a CPU tensor, causing an indefinite stall (first Colab attempt: 12+ min with zero output). Fix: one line, `padded_neighbor_list` now also moved to `self.device`, mirroring the already-correct path — no change to any computation. Applied as a patch cell in the notebook (section 1b), confirmed working on a fresh Colab runtime.
-- [x] Even with the bug fixed, **GraphSAGE training takes about 2x as long as GIN per fold** (~10 min vs. ~5 min) — this is separate from the bug and expected: max-pooling builds its neighbor list via a plain Python loop every iteration instead of GIN's fast sparse-matrix operation, so it's inherently slower even when correctly running on GPU. ~100 min/dataset, ~5-7 hrs total across all 4 datasets at full spec.
-- [ ] User continues running IMDB-MULTI to completion, then re-runs IMDB-BINARY (was stopped early, before letting a full fold finish) and the two new-data datasets
-- [ ] Log all 4 GraphSAGE results into the table below
+- [x] **Bug found and fixed:** the official code's max-pooling path (`models/graphcnn.py`, `__preprocess_neighbors_maxpool`) builds an index tensor (`padded_neighbor_list`) but never moves it to GPU — unlike the working sum/average-pooling path a few lines below, which correctly does `Adj_block.to(self.device)`. On GPU this meant every training iteration indexed a CUDA tensor with a CPU tensor, causing an indefinite stall (first Colab attempt: 12+ min with zero output). Fix: one line, `padded_neighbor_list` now also moved to `self.device`, mirroring the already-correct path — no change to any computation. Originally applied as a patch cell in the Colab notebook (section 1b); now also applied automatically by `replication/setup_server.sh` for the uni-server runs (section 3a), so it's no longer Colab-only.
+- [x] Even with the bug fixed, **GraphSAGE training is substantially slower than GIN per fold** — on Colab's T4 this was ~2x (~10 min vs. ~5 min); on the uni server's RTX 6000 Ada the gap widened to ~5x (~9.25 min vs. ~1.8 min). Root cause is the same either way (max-pooling builds its neighbor list via a single-threaded Python loop every iteration instead of GIN's GPU-bound sparse-matrix op), it's just proportionally larger on faster hardware since GIN's GPU-bound step shrinks a lot while GraphSAGE's CPU-bound loop doesn't. Not a new bug — confirmed via `nvidia-smi`/`top` on the server (GPU ~77% util but training process pinned to one CPU core).
+- [x] **Moved full-spec execution off Colab onto the university's `aai-lab` GPU server** (RTX 6000 Ada, 49GB VRAM) via direct SSH — see section 3a for the full setup/rationale. GIN's IMDB-BINARY run there completed all 10 folds in ~17.8 min total (vs. Colab's ~50 min for the same dataset).
+- [x] Full batch (GIN + GraphSAGE × all 4 datasets) ran to completion on the uni server, 2026-08-26 04:28–08:45 UTC (~4h17m total, well under the ~7.3h estimate — the two new-data datasets ran much faster than expected, see note below) via `replication/run_all_server.sh` in tmux session `gnn`; result JSONs pulled back to `results/logs/`
+- [x] Log all 4 GraphSAGE results into the table below
 - [ ] Decide whether to also add GCN (Mean–1-Layer) — same marginal effort, one flag change (`--neighbor_pooling_type average` instead of `max`), and doesn't hit either the bug or the structural slowdown since it uses the sum/average path
 
 **GraphSAGE results:**
 
 | Dataset | Paper GraphSAGE acc. | Our GIN result (section 4) | Our GraphSAGE result |
 |---|---|---|---|
-| IMDB-BINARY (original) | 72.3 ± 5.3% | 74.4 ± 4.1% | — |
-| IMDB-MULTI (original) | 50.9 ± 2.2% | 50.5 ± 2.3% | — |
-| IMDBBINARY-NEW (scraped) | n/a | 56.1 ± 2.2% | — |
-| IMDBMULTI-NEW (scraped) | n/a | 40.9 ± 2.1% | — |
+| IMDB-BINARY (original) | 72.3 ± 5.3% | 74.4 ± 4.1% | **72.6 ± 3.0%** (best epoch 14, ~93.8 min) |
+| IMDB-MULTI (original) | 50.9 ± 2.2% | 50.5 ± 2.3% | **50.9 ± 2.8%** (best epoch 271, ~53.6 min) |
+| IMDBBINARY-NEW (scraped) | n/a | 56.1 ± 2.2% | **56.2 ± 2.3%** (best epoch 181, ~16.9 min) |
+| IMDBMULTI-NEW (scraped) | n/a | 40.9 ± 2.1% | **41.0 ± 2.2%** (best epoch 273, ~18.3 min) |
+
+**Result — GraphSAGE gap holds on original data, vanishes on new data:**
+- **On the original benchmarks, our GraphSAGE numbers land almost exactly on the paper's own**: IMDB-BINARY 72.6% vs. paper's 72.3% (within 0.3 pts); IMDB-MULTI 50.9% vs. paper's 50.9% (exact match). GIN still leads GraphSAGE on both, matching the paper's headline claim (IMDB-BINARY: +1.8 pts for GIN; IMDB-MULTI: -0.3 pts, essentially a tie, close to the paper's own +1.4).
+- **On the new scraped data, the GIN/GraphSAGE gap essentially disappears**: IMDBBINARY-NEW GraphSAGE (56.2%) is statistically indistinguishable from GIN (56.1%); IMDBMULTI-NEW GraphSAGE (41.0%) vs. GIN (41.0%) — an exact tie. This is the outcome the density/clique hypothesis from section 4 predicted: on near-clique graphs with little topological structure to exploit, GIN's extra expressive power (distinguishing structures max/mean-pooling architectures can't) stops mattering, because there's much less structure left to distinguish. Worth highlighting in the final report as a second, independent line of evidence for the same explanation.
+- **Anomaly worth a closer look for the report:** GraphSAGE ran dramatically faster on the new-data datasets (~17-18 min) than on the original datasets (~54-94 min) despite similar or larger average node counts — the opposite of what raw graph size would predict. Likely tied to the same density/clique structure (near-clique graphs may produce more uniform/smaller neighbor-list padding in `__preprocess_neighbors_maxpool`, cutting the Python-loop cost), but not yet confirmed — flagged as a follow-up, not blocking.
 
 ## 8. Deliverables (Phase E)
 
@@ -135,6 +154,9 @@ Question this answers: does GraphSAGE's ~2-3 point gap behind GIN on the origina
 | 2026-08-25 | Moved full-spec training runs (350 epochs × 10 folds) from local CPU to Google Colab (T4 GPU) via a self-contained notebook | Local CPU timing showed ~3.5 hrs/dataset × 4 datasets ≈ 6-7 hrs total — too slow; user has Colab GPU access, and the official code already supports CUDA with zero changes |
 | 2026-08-25 | Added GraphSAGE as a second algorithm for comparison, implemented via the GIN paper's own architecture flags rather than a separate codebase | Zero new code/dependencies (lowest error risk), and it's the paper's own defined approximation — comparable methodology to how the paper itself reports the GraphSAGE baseline |
 | 2026-08-25 | Patched a one-line device-placement bug in the official repo's `models/graphcnn.py` (max-pooling path never moved its index tensor to GPU) | First GraphSAGE Colab run stalled with zero output for 12+ min on fold 0; root-caused via local timing tests + direct source inspection (confirmed the working sum/average path already does the `.to(self.device)` call that's missing here); fix is a single line, changes no computation, mirrors existing correct code |
+| 2026-08-26 | Moved full-spec training off Colab onto direct SSH access to a university lab GPU server (`aai-lab`, RTX 6000 Ada) | Hit Colab's GPU usage quota partway through GraphSAGE runs; the uni server has no such cap, isn't scheduler-managed, and is currently uncontended — see section 3a |
+| 2026-08-26 | Pushed the local repo to a new public GitHub remote (`SobhanSalarianCognitivo/Gin-Graph`) | Needed so the uni server could `git clone` the project; repo had never been pushed anywhere before this |
+| 2026-08-26 | Kept the original Colab GIN numbers as the logged replication result in section 4 rather than overwriting with the uni-server re-run | Server re-run landed within ~1 point on all 4 datasets (good reproducibility signal, logged as a note) but the Colab numbers were already analyzed in depth; re-running the analysis for a sub-1-point difference wasn't worth it |
 
 ## 10. Open questions
 
@@ -142,9 +164,10 @@ Question this answers: does GraphSAGE's ~2-3 point gap behind GIN on the origina
 
 ## 11. Next step
 
-Waiting on the GraphSAGE Colab run (`notebooks/graphsage_colab_comparison.ipynb`) — user to run cell-by-cell and report back the final summary block. After that's logged, remaining items:
-1. Dig deeper into *why* accuracy drops on the new data — check whether misclassified new-data graphs correlate with edge density/clique-ness (data already available in the `_metadata.json` files + saved CV curves)
+GIN + GraphSAGE results are now fully logged for all 4 datasets (sections 4 and 7) — both algorithms ran to completion on the uni GPU server on 2026-08-26. Remaining items before Phase E:
+1. Dig deeper into *why* accuracy drops on the new data, and why GIN's edge over GraphSAGE vanishes there — check whether misclassified new-data graphs correlate with edge density/clique-ness (data already available in the `_metadata.json` files + saved CV curves in `results/logs/`)
 2. Run the investigation experiment: build a small pair of non-isomorphic graphs that mean/max-pooling GNNs can't tell apart, confirm GIN can — a direct test of the paper's theoretical claim
 3. Decide on adding GCN as a third comparison point
+4. Optional: explain the GraphSAGE new-data speed anomaly noted in section 7 (much faster than the original-data runs, opposite of what graph size would predict)
 
 After that: move to Phase E (proposal, presentation, report).

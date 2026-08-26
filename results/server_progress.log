@@ -1,0 +1,37 @@
+=== 2026-08-26 14:45:47 ===
+Stage: Wed Aug 26 04:28:46 AM UTC 2026 : GIN on IMDBBINARY
+Progress: [IMDBBINARY] fold 8 done in 105.7s (final test_acc=0.7200)
+
+=== 2026-08-26 15:15:48 ===
+Stage: Wed Aug 26 04:46:34 AM UTC 2026 : GraphSAGE (max-pool, 1-layer MLP) on IMDBBINARY
+Progress: [IMDBBINARY] fold 2 done in 555.4s (final test_acc=0.7100)
+
+=== 2026-08-26 15:45:50 ===
+Stage: Wed Aug 26 04:46:34 AM UTC 2026 : GraphSAGE (max-pool, 1-layer MLP) on IMDBBINARY
+Progress: [IMDBBINARY] fold 5 done in 539.0s (final test_acc=0.6500)
+
+=== 2026-08-26 16:15:52 ===
+Stage: Wed Aug 26 04:46:34 AM UTC 2026 : GraphSAGE (max-pool, 1-layer MLP) on IMDBBINARY
+Progress: [IMDBBINARY] fold 8 done in 562.1s (final test_acc=0.6800)
+
+=== 2026-08-26 16:45:53 ===
+Stage: Wed Aug 26 06:38:41 AM UTC 2026 : GraphSAGE (max-pool, 1-layer MLP) on IMDBMULTI
+Progress: [IMDBMULTI] fold 0 done in 308.0s (final test_acc=0.5267)
+
+=== 2026-08-26 17:15:54 ===
+Stage: Wed Aug 26 06:38:41 AM UTC 2026 : GraphSAGE (max-pool, 1-layer MLP) on IMDBMULTI
+Progress: [IMDBMULTI] fold 5 done in 329.4s (final test_acc=0.4800)
+
+=== 2026-08-26 17:45:56 ===
+Stage: Wed Aug 26 07:32:19 AM UTC 2026 : GIN on IMDBBINARY-NEW
+Progress: [IMDBBINARY-NEW] fold 6 done in 109.9s (final test_acc=0.5758)
+
+=== 2026-08-26 18:15:58 ===
+Stage: Wed Aug 26 08:07:27 AM UTC 2026 : GIN on IMDBMULTI-NEW
+Progress: [IMDBMULTI-NEW] fold 3 done in 119.6s (final test_acc=0.4430)
+
+=== 2026-08-26 18:46:00 ===
+Stage: Wed Aug 26 08:27:14 AM UTC 2026 : GraphSAGE (max-pool, 1-layer MLP) on IMDBMULTI-NEW
+Progress: [IMDBMULTI-NEW] fold 9 done in 109.4s (final test_acc=0.3893)
+STATUS: ALL RUNS COMPLETE
+
