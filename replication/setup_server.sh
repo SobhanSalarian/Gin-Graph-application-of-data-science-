@@ -44,6 +44,10 @@ echo "See https://pytorch.org/get-started/locally/ for the current matrix."
 pip install torch --index-url https://download.pytorch.org/whl/cu121
 
 pip install -r replication/official-repo/requirements.txt
+# scikit-learn isn't listed in the official repo's requirements.txt but
+# util.py imports it (StratifiedKFold) -- only surfaced on a clean venv,
+# since Colab and most local setups already have it preinstalled.
+pip install scikit-learn
 
 echo "== Sanity check =="
 python -c "import torch; print('CUDA available:', torch.cuda.is_available()); print('device:', torch.cuda.get_device_name(0) if torch.cuda.is_available() else 'none')"
