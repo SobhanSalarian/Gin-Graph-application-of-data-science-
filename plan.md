@@ -88,14 +88,42 @@ Paper's headline claim: GIN-0 matches or beats every baseline (WL subtree kernel
 - [x] Compared accuracy to our own IMDB-BINARY/IMDB-MULTI replication results (not just the paper's published numbers) — **the paper's claim does not fully hold on new data**: -18.3 points on binary, -9.6 points on multi, isolated to the data since code/hyperparameters/protocol are identical. See section 4 for the full result and leading explanation (graph density/clique structure).
 - [ ] Dig into failure/success cases in more depth — explicit grading criterion, not optional polish. Next: check whether individual misclassified new-data graphs correlate with how clique-like they are (e.g. edge density per graph vs. correct/incorrect prediction)
 
-## 7. Deliverables (Phase E)
+## 7. Baseline comparison: GraphSAGE
+
+**Why GraphSAGE:** the GIN paper's own Table 1 doesn't use GraphSAGE's original code — it approximates GraphSAGE *inside its own architecture* (quoting the paper: "max–1-layer correspond[s] to GraphSAGE, up to minor architecture modifications"). That means we can get this comparison from the exact same tested codebase, just with two flags changed (`--neighbor_pooling_type max --num_mlp_layers 1` instead of GIN's sum-pooling + multi-layer MLP) — zero new code, zero new dependencies, same training protocol.
+
+Paper's Table 1 numbers for this comparison, for context on what to expect:
+
+| Dataset | GIN-0 | GraphSAGE (Max–1-Layer) |
+|---|---|---|
+| IMDB-BINARY | 75.1 ± 5.1% | 72.3 ± 5.3% |
+| IMDB-MULTI | 52.3 ± 2.8% | 50.9 ± 2.2% |
+
+Question this answers: does GraphSAGE's ~2-3 point gap behind GIN on the original data hold, shrink, or vanish on our denser new-data graphs? If the density/clique explanation from section 4 is right, it might shrink — less structure overall could mean less room for GIN's extra expressiveness to matter.
+
+- [x] Confirmed locally (small smoke-test runs, not full spec) that the flag combination runs cleanly on both an original dataset (IMDB-BINARY) and a new dataset (IMDBBINARY-NEW) — no errors, ready for a full Colab run
+- [x] Built `notebooks/graphsage_colab_comparison.ipynb` — same structure as the GIN notebook (clone repo, upload new datasets, run all 4 datasets, print summary), driver script tags output filenames with `_graphsage` so results don't collide with the earlier GIN run's files
+- [ ] User runs the notebook on Colab T4, reports back the final summary block
+- [ ] Log all 4 GraphSAGE results into the table below
+- [ ] Decide whether to also add GCN (Mean–1-Layer) — same marginal effort, one flag change (`--neighbor_pooling_type average` instead of `max`)
+
+**GraphSAGE results:**
+
+| Dataset | Paper GraphSAGE acc. | Our GIN result (section 4) | Our GraphSAGE result |
+|---|---|---|---|
+| IMDB-BINARY (original) | 72.3 ± 5.3% | 74.4 ± 4.1% | — |
+| IMDB-MULTI (original) | 50.9 ± 2.2% | 50.5 ± 2.3% | — |
+| IMDBBINARY-NEW (scraped) | n/a | 56.1 ± 2.2% | — |
+| IMDBMULTI-NEW (scraped) | n/a | 40.9 ± 2.1% | — |
+
+## 8. Deliverables (Phase E)
 
 - [ ] Project proposal draft (`proposal/`) — paper justification, feasibility, plan
 - [ ] Update presentation (`presentation/`)
 - [ ] Final report (`report/`) — full writeup with all results, code, new data, limitations
 - [ ] Clean up GitHub repo for submission (report, scripts, new data, README)
 
-## 8. Decisions log
+## 9. Decisions log
 
 | Date | Decision | Why |
 |---|---|---|
@@ -103,15 +131,17 @@ Paper's headline claim: GIN-0 matches or beats every baseline (WL subtree kernel
 | 2026-08-24 | Skipping the modern PyTorch Geometric reimplementation for now | Official repo already runs cleanly on current PyTorch/Python — no need for a fallback unless something breaks later at full scale |
 | 2026-08-25 | Narrowed Phase B replication to IMDB-BINARY and IMDB-MULTI only, dropped the other 7 benchmark datasets from the plan | Only these two have matching scraped new data (`IMDBBINARY-NEW`, `IMDBMULTI-NEW`), so replicating exactly these two directly feeds the Phase D comparison instead of spreading effort across datasets that don't connect to the new-data test |
 | 2026-08-25 | Moved full-spec training runs (350 epochs × 10 folds) from local CPU to Google Colab (T4 GPU) via a self-contained notebook | Local CPU timing showed ~3.5 hrs/dataset × 4 datasets ≈ 6-7 hrs total — too slow; user has Colab GPU access, and the official code already supports CUDA with zero changes |
+| 2026-08-25 | Added GraphSAGE as a second algorithm for comparison, implemented via the GIN paper's own architecture flags rather than a separate codebase | Zero new code/dependencies (lowest error risk), and it's the paper's own defined approximation — comparable methodology to how the paper itself reports the GraphSAGE baseline |
 
-## 9. Open questions
+## 10. Open questions
 
 - None currently blocking
 
-## 10. Next step
+## 11. Next step
 
-All 4 full training runs are done and logged (section 4). Two things left before this phase is wrapped up:
+Waiting on the GraphSAGE Colab run (`notebooks/graphsage_colab_comparison.ipynb`) — user to run cell-by-cell and report back the final summary block. After that's logged, remaining items:
 1. Dig deeper into *why* accuracy drops on the new data — check whether misclassified new-data graphs correlate with edge density/clique-ness (data already available in the `_metadata.json` files + saved CV curves)
 2. Run the investigation experiment: build a small pair of non-isomorphic graphs that mean/max-pooling GNNs can't tell apart, confirm GIN can — a direct test of the paper's theoretical claim
+3. Decide on adding GCN as a third comparison point
 
 After that: move to Phase E (proposal, presentation, report).
