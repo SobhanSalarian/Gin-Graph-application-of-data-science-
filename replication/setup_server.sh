@@ -17,6 +17,11 @@ if [ ! -d replication/official-repo ]; then
     git clone https://github.com/weihua916/powerful-gnns replication/official-repo
 fi
 
+echo "== Extracting bundled datasets (dataset.zip) =="
+if [ ! -d replication/official-repo/dataset/IMDBBINARY ]; then
+    unzip -o -q replication/official-repo/dataset.zip -d replication/official-repo
+fi
+
 echo "== Applying GPU device-placement fix to max-pooling path (needed for GraphSAGE runs) =="
 python3 - <<'PYEOF'
 path = "replication/official-repo/models/graphcnn.py"
