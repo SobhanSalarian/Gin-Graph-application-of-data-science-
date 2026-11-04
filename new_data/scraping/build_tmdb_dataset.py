@@ -42,8 +42,8 @@ GENRE_SETS = {
     "multi": ["Comedy", "Romance", "Science Fiction"],
 }
 DATASET_NAMES = {
-    "binary": "IMDBBINARY-NEW",
-    "multi": "IMDBMULTI-NEW",
+    "binary": "IMDBBINARY-2016",
+    "multi": "IMDBMULTI-2016",
 }
 
 
@@ -78,10 +78,10 @@ class TMDbClient:
         return self.get(
             "/discover/movie",
             with_genres=genre_id,
-            primary_release_date_gte=min_date,
             sort_by="popularity.desc",
             include_adult="false",
-            **{"vote_count.gte": 20},
+            # TMDb silently ignores misspelled filters, so these need the dot
+            **{"vote_count.gte": 20, "primary_release_date.gte": min_date},
             page=page,
         )
 
@@ -121,6 +121,12 @@ def collect_movies_for_genre(client, genre_name, all_genre_ids, target_count,
 
     print(f"  [{genre_name}] found {len(movies)} candidate movies "
           f"(wanted {target_count})", file=sys.stderr)
+
+    # dates are ISO strings, so they compare correctly; a missing date also fails
+    too_old = [m for m in movies if (m.get("release_date") or "") < min_date]
+    if too_old:
+        sys.exit(f"[{genre_name}] date filter failed: {len(too_old)} movies before "
+                 f"{min_date}, e.g. {too_old[0].get('title')}")
 
     # fetch cast for each, keep only movies with enough billed actors
     movie_records = []
@@ -170,6 +176,8 @@ def build_graphs(movie_records):
             "edges": edges,
             "movie_id": rec["movie_id"],
             "title": rec["title"],
+            "release_date": rec["release_date"],
+            "actor_ids": actor_ids,
             "actor_names": [a["name"] for a in rec["actors"]],
         })
     return graphs
@@ -239,7 +247,8 @@ def main():
                           for name in GENRE_SETS[args.mode]},
         "graphs": [
             {"movie_id": g["movie_id"], "title": g["title"], "label": g["label"],
-             "n_nodes": g["n_nodes"], "actor_names": g["actor_names"]}
+             "release_date": g["release_date"], "n_nodes": g["n_nodes"],
+             "actor_ids": g["actor_ids"], "actor_names": g["actor_names"]}
             for g in graphs
         ],
     }
@@ -248,6 +257,8 @@ def main():
     print(f"\nWrote {len(graphs)} graphs to {out_dir}")
     print(f"Avg nodes: {meta['avg_nodes']:.1f}, avg edges: {meta['avg_edges']:.1f}")
     print(f"Label counts: {meta['label_counts']}")
+    print(f"Release dates: {min(g['release_date'] for g in graphs)} to "
+          f"{max(g['release_date'] for g in graphs)}")
 
 
 if __name__ == "__main__":

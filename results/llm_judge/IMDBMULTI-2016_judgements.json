@@ -1,0 +1,1811 @@
+{
+  "model": "claude-sonnet-5-5",
+  "seed": 0,
+  "genres": [
+    "Comedy",
+    "Romance",
+    "Science Fiction"
+  ],
+  "films": [
+    {
+      "movie_id": 1242011,
+      "title": "Together",
+      "tmdb": "Romance",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 1751701,
+      "title": "After Impact",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 384521,
+      "title": "The Cloverfield Paradox",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 1291559,
+      "title": "Drawing Closer",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 359784,
+      "title": "Maudie",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 642121,
+      "title": "The Stranger by the Shore",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 567646,
+      "title": "Extreme Job",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 353066,
+      "title": "The Vanishing of Sidney Hall",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 459151,
+      "title": "The Boss Baby: Family Business",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 447365,
+      "title": "Guardians of the Galaxy Vol. 3",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 1160981,
+      "title": "Hear Me: Our Summer",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 1498036,
+      "title": "Tres de m\u00e1s",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 1081003,
+      "title": "Supergirl",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 565743,
+      "title": "The Vast of Night",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 1437195,
+      "title": "Livestream from Hell",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 1068518,
+      "title": "Haunted Heart",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 1062807,
+      "title": "SPY x FAMILY CODE: White",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 487620,
+      "title": "Kill Order",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 626412,
+      "title": "Alienoid: Return to the Future",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 829402,
+      "title": "Ultraman: Rising",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 446894,
+      "title": "Smallfoot",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 590223,
+      "title": "Love and Monsters",
+      "tmdb": "Comedy",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 1522377,
+      "title": "Two Worlds One Wish",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 1595852,
+      "title": "Boulevard",
+      "tmdb": "Romance",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 1284016,
+      "title": "Power Ballad",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 516846,
+      "title": "Once Upon a Prince",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 668461,
+      "title": "Slumberland",
+      "tmdb": "Comedy",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 299536,
+      "title": "Avengers: Infinity War",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 366672,
+      "title": "Paws of Fury: The Legend of Hank",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 579047,
+      "title": "Reminiscence",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 1450527,
+      "title": "Forbidden Fruits",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 747779,
+      "title": "One Fine Morning",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 1242898,
+      "title": "Predator: Badlands",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 356305,
+      "title": "Why Him?",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 369192,
+      "title": "Battle of the Sexes",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 544404,
+      "title": "Who You Think I Am",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 616037,
+      "title": "Thor: Love and Thunder",
+      "tmdb": "Comedy",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 460790,
+      "title": "Starship Troopers: Traitor of Mars",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 333339,
+      "title": "Ready Player One",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 141052,
+      "title": "Justice League",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 1501018,
+      "title": "A Family of Bastards",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 1497463,
+      "title": "All That We Never Were",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 652837,
+      "title": "Josee, the Tiger and the Fish",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 881211,
+      "title": "Snoopy Presents: For Auld Lang Syne",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 336455,
+      "title": "Viral",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 387426,
+      "title": "Okja",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 385448,
+      "title": "The Little Mermaid",
+      "tmdb": "Romance",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 1239198,
+      "title": "My Dearest Se\u00f1orita",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 831405,
+      "title": "Injustice",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 910571,
+      "title": "Fair Play",
+      "tmdb": "Romance",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 703771,
+      "title": "Deathstroke: Knights & Dragons - The Movie",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 1316092,
+      "title": "\u201cWuthering Heights\u201d",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 390056,
+      "title": "Rebel in the Rye",
+      "tmdb": "Romance",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 1317088,
+      "title": "The Assessment",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 914215,
+      "title": "Humane",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 579828,
+      "title": "Superdeep",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 1317672,
+      "title": "Love Me Love Me",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 1121575,
+      "title": "Babylon 5: The Road Home",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 733277,
+      "title": "Follow Me to Daisy Hills",
+      "tmdb": "Romance",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 691683,
+      "title": "Cheaper by the Dozen",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 516850,
+      "title": "The Mermaid: Lake of the Dead",
+      "tmdb": "Romance",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 1239134,
+      "title": "Bhooth Bangla",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 1314129,
+      "title": "Preparation for the Next Life",
+      "tmdb": "Romance",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 608195,
+      "title": "Ghosts of War",
+      "tmdb": "Science Fiction",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 1458857,
+      "title": "Doing Life",
+      "tmdb": "Romance",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 1397485,
+      "title": "Girls Like Girls",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 974521,
+      "title": "No Bears",
+      "tmdb": "Romance",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 337404,
+      "title": "Cruella",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 390874,
+      "title": "Ashes in the Snow",
+      "tmdb": "Romance",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 1630423,
+      "title": "My Dearest Assassin",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 1154598,
+      "title": "LEGO Marvel Avengers: Code Red",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 305470,
+      "title": "Power Rangers",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 1228682,
+      "title": "Dreams",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 274855,
+      "title": "Geostorm",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 407624,
+      "title": "Saltwater",
+      "tmdb": "Science Fiction",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 1301421,
+      "title": "The Sheep Detectives",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 1477317,
+      "title": "Your Fault: London",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 752623,
+      "title": "The Lost City",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 428493,
+      "title": "God's Own Country",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 783675,
+      "title": "The First Slam Dunk",
+      "tmdb": "Comedy",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 443486,
+      "title": "Red Istanbul",
+      "tmdb": "Romance",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 553600,
+      "title": "Promare",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 923939,
+      "title": "The Wonderful Story of Henry Sugar",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 351286,
+      "title": "Jurassic World: Fallen Kingdom",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 568467,
+      "title": "Ammonite",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 1149504,
+      "title": "Honey Don't!",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 375262,
+      "title": "The Favourite",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 320288,
+      "title": "Dark Phoenix",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 998731,
+      "title": "Sasaki and Miyano: Graduation",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 487045,
+      "title": "Snowmance",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 283566,
+      "title": "Evangelion: 3.0+1.0 Thrice Upon a Time",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 530081,
+      "title": "The Man Who Killed Hitler and Then the Bigfoot",
+      "tmdb": "Science Fiction",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 338958,
+      "title": "Disenchanted",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 565770,
+      "title": "Blue Beetle",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 1245859,
+      "title": "Savage House",
+      "tmdb": "Comedy",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 642208,
+      "title": "Supernova",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 1072876,
+      "title": "Self Reliance",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 691179,
+      "title": "Friends: The Reunion",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 1011985,
+      "title": "Kung Fu Panda 4",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 593475,
+      "title": "My Out-Laws",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 369885,
+      "title": "Allied",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 1040229,
+      "title": "T.I.M.",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 654344,
+      "title": "A Bookshop in Paris",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 1172676,
+      "title": "Poison",
+      "tmdb": "Comedy",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 664413,
+      "title": "365 Days",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 324670,
+      "title": "Spectral",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 1016661,
+      "title": "The Courtship",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 766105,
+      "title": "A Taste of Hunger",
+      "tmdb": "Romance",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 1150394,
+      "title": "La Leyenda de los Chaneques",
+      "tmdb": "Comedy",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 508791,
+      "title": "The Sun Is Also a Star",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 1327862,
+      "title": "Regretting You",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 1175942,
+      "title": "The Bad Guys 2",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 454640,
+      "title": "The Angry Birds Movie 2",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 1554956,
+      "title": "The Incomer",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 739010,
+      "title": "LX 2048",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 433249,
+      "title": "IO",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 1376434,
+      "title": "Predator: Killer of Killers",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 576920,
+      "title": "Silver Skates",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 316023,
+      "title": "Mike and Dave Need Wedding Dates",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 1139829,
+      "title": "Orion and the Dark",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 1064028,
+      "title": "Subservience",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 642885,
+      "title": "Hocus Pocus 2",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 891584,
+      "title": "The History of Sound",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 572154,
+      "title": "Rascal Does Not Dream of a Dreaming Girl",
+      "tmdb": "Romance",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 399636,
+      "title": "Retake",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 615658,
+      "title": "Awake",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 364689,
+      "title": "Ferdinand",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 897087,
+      "title": "Freelance",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 604079,
+      "title": "The Long Walk",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 422931,
+      "title": "Man Divided",
+      "tmdb": "Science Fiction",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 313943,
+      "title": "Revolt",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 933260,
+      "title": "The Substance",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 491473,
+      "title": "Gloria Bell",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 550231,
+      "title": "The Secret: Dare to Dream",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 1228322,
+      "title": "The Divine Sarah Bernhardt",
+      "tmdb": "Romance",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 810223,
+      "title": "An Autumn Romance",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 345940,
+      "title": "The Meg",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 523781,
+      "title": "Words on Bathroom Walls",
+      "tmdb": "Romance",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 1075794,
+      "title": "Leo",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 353070,
+      "title": "Going in Style",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 570670,
+      "title": "The Invisible Man",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 1323244,
+      "title": "Rage of Stars",
+      "tmdb": "Science Fiction",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 1310861,
+      "title": "The Goldsmith's Secret",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 763148,
+      "title": "Time Is Up",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 639999,
+      "title": "Ejen Ali: The Movie",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 520023,
+      "title": "Bodies Bodies Bodies",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 820446,
+      "title": "Downton Abbey: A New Era",
+      "tmdb": "Romance",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 438695,
+      "title": "Sing 2",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 916728,
+      "title": "Slingshot",
+      "tmdb": "Science Fiction",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 1155234,
+      "title": "Endless Journey of Love",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 617126,
+      "title": "The Fantastic 4: First Steps",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 931102,
+      "title": "Ride On",
+      "tmdb": "Comedy",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 693134,
+      "title": "Dune: Part Two",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 994108,
+      "title": "All of Us Strangers",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 1111873,
+      "title": "Abigail",
+      "tmdb": "Comedy",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 419479,
+      "title": "The Babysitter",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 1108427,
+      "title": "Moana",
+      "tmdb": "Comedy",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 1340110,
+      "title": "Redux Redux",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 513310,
+      "title": "Boss Level",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 391713,
+      "title": "Lady Bird",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 912908,
+      "title": "Strays",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 743232,
+      "title": "Tigers",
+      "tmdb": "Romance",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 932420,
+      "title": "Code 8 Part II",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 420821,
+      "title": "Chip 'n Dale: Rescue Rangers",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 1371189,
+      "title": "Ruth & Boaz",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 1507796,
+      "title": "On the Sea",
+      "tmdb": "Romance",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 1017066,
+      "title": "Heaven in Hell",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 760245,
+      "title": "Foe",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 1440098,
+      "title": "Drawn Together",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 703745,
+      "title": "Deep Blue Sea 3",
+      "tmdb": "Science Fiction",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 399174,
+      "title": "Isle of Dogs",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 695721,
+      "title": "The Hunger Games: The Ballad of Songbirds & Snakes",
+      "tmdb": "Science Fiction",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 465136,
+      "title": "Every Day",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 1155058,
+      "title": "Watchmen: Chapter I",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 747188,
+      "title": "Asteroid City",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 330457,
+      "title": "Frozen II",
+      "tmdb": "Comedy",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 527435,
+      "title": "The Christmas Chronicles",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 1217584,
+      "title": "Torrente for President",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 658905,
+      "title": "Perfumes",
+      "tmdb": "Comedy",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 845781,
+      "title": "Red One",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 570480,
+      "title": "Trouble",
+      "tmdb": "Comedy",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 425148,
+      "title": "Show Dogs",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 433356,
+      "title": "The Ottoman Lieutenant",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 762504,
+      "title": "Nope",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 623491,
+      "title": "The Babysitter: Killer Queen",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 718930,
+      "title": "Bullet Train",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 321612,
+      "title": "Beauty and the Beast",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 542178,
+      "title": "The French Dispatch of the Liberty, Kansas Evening Sun",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 795811,
+      "title": "Wheel of Fortune and Fantasy",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 1122932,
+      "title": "See You on Venus",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 1323784,
+      "title": "Bad Influence",
+      "tmdb": "Romance",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 352498,
+      "title": "First Girl I Loved",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 290512,
+      "title": "The Mountain Between Us",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 680041,
+      "title": "Over the Sky",
+      "tmdb": "Romance",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 670292,
+      "title": "The Creator",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 401478,
+      "title": "Death Race: Beyond Anarchy",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 876797,
+      "title": "The Last 10 Years",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 758330,
+      "title": "Good Luck to You, Leo Grande",
+      "tmdb": "Romance",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 786532,
+      "title": "Agent Revelation",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 1081313,
+      "title": "Tonight You're Sleeping with Me",
+      "tmdb": "Romance",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 1012201,
+      "title": "HAIKYU!! The Dumpster Battle",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 733317,
+      "title": "Monsters of Man",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 535369,
+      "title": "RX 100",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 379291,
+      "title": "Justice League vs. Teen Titans",
+      "tmdb": "Science Fiction",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 976293,
+      "title": "Lie with Me",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 522478,
+      "title": "Peter Rabbit 2: The Runaway",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 941019,
+      "title": "LOLA",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 1659389,
+      "title": "One Piece Heroines",
+      "tmdb": "Comedy",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 1599993,
+      "title": "Animales",
+      "tmdb": "Comedy",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 315837,
+      "title": "Ghost in the Shell",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 1145899,
+      "title": "Marsupilami",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 415132,
+      "title": "Ares",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 458253,
+      "title": "Missing Link",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 366901,
+      "title": "Despite the Falling Snow",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 354282,
+      "title": "Science Fiction Volume One: The Osiris Child",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 1258151,
+      "title": "Kraken",
+      "tmdb": "Science Fiction",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 959429,
+      "title": "Lonely Planet",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 762975,
+      "title": "Purple Hearts",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 497984,
+      "title": "Monster Hunt 2",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 497828,
+      "title": "Triangle of Sadness",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 651571,
+      "title": "Breach",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 589978,
+      "title": "Fahim",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 399566,
+      "title": "Godzilla vs. Kong",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 246655,
+      "title": "X-Men: Apocalypse",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 990365,
+      "title": "THE LEGEND & BUTTERFLY",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 1022964,
+      "title": "Candy Cane Lane",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 502356,
+      "title": "The Super Mario Bros. Movie",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 778855,
+      "title": "Chickenhare and the Hamster of Darkness",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 1023845,
+      "title": "Silver and the Book of Dreams",
+      "tmdb": "Romance",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 337676,
+      "title": "Mektoub, My Love: Canto Uno",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 290859,
+      "title": "Terminator: Dark Fate",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 1466115,
+      "title": "Even If This Love Disappears Tonight",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 548257,
+      "title": "Alien Predator",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 458897,
+      "title": "Charlie's Angels",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 535544,
+      "title": "Downton Abbey",
+      "tmdb": "Romance",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 1514026,
+      "title": "Buddy",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 1088548,
+      "title": "Bitter Christmas",
+      "tmdb": "Comedy",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 618354,
+      "title": "Superman: Man of Tomorrow",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 371645,
+      "title": "Hunt for the Wilderpeople",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 1236153,
+      "title": "Mercy",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 410366,
+      "title": "The History of Love",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 334533,
+      "title": "Captain Fantastic",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 616747,
+      "title": "Haunted Mansion",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 1265609,
+      "title": "War Machine",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 1044302,
+      "title": "Last Call for Istanbul",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 350060,
+      "title": "Heartstone",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 446132,
+      "title": "Gauguin: Voyage to Tahiti",
+      "tmdb": "Romance",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 436270,
+      "title": "Black Adam",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 524434,
+      "title": "Eternals",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 569547,
+      "title": "Black Mirror: Bandersnatch",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 634429,
+      "title": "Shin Ultraman",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 653349,
+      "title": "Vacation Friends",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 1124619,
+      "title": "Bride Hard",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 675319,
+      "title": "Zone 414",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 886396,
+      "title": "Batman and Superman: Battle of the Super Sons",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 126889,
+      "title": "Alien: Covenant",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 604571,
+      "title": "Deus",
+      "tmdb": "Science Fiction",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 425980,
+      "title": "Brad's Status",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 792293,
+      "title": "Dumb Money",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 1084577,
+      "title": "Balls Up",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 877817,
+      "title": "Wolfs",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 406990,
+      "title": "What Happened to Monday",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 301528,
+      "title": "Toy Story 4",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 487242,
+      "title": "Suicide Squad: Hell to Pay",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 933547,
+      "title": "Into the Wind",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 1144443,
+      "title": "Follow My Voice",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 1140066,
+      "title": "Paradise",
+      "tmdb": "Science Fiction",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 343668,
+      "title": "Kingsman: The Golden Circle",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 1235192,
+      "title": "Wormtown",
+      "tmdb": "Science Fiction",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 618355,
+      "title": "Superman: Red Son",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 284054,
+      "title": "Black Panther",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 687163,
+      "title": "Project Hail Mary",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 446893,
+      "title": "Trolls World Tour",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 869612,
+      "title": "Master Gardener",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 1022690,
+      "title": "Ricky Stanicky",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 614911,
+      "title": "The Midnight Sky",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 1048241,
+      "title": "My Spy The Eternal City",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 380225,
+      "title": "Like Crazy",
+      "tmdb": "Comedy",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 634649,
+      "title": "Spider-Man: No Way Home",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 1114894,
+      "title": "Star Trek: Section 31",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 376660,
+      "title": "The Edge of Seventeen",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 300681,
+      "title": "Replicas",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 988762,
+      "title": "A Place to Fight For",
+      "tmdb": "Romance",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 601796,
+      "title": "Alienoid",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 364733,
+      "title": "Blind",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 335983,
+      "title": "Venom",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 675445,
+      "title": "PAW Patrol: The Movie",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 797838,
+      "title": "Firebird",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 1040148,
+      "title": "Ruby Gillman, Teenage Kraken",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 957304,
+      "title": "Drive-Away Dolls",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 325133,
+      "title": "Neighbors 2: Sorority Rising",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 413780,
+      "title": "The Worthy",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 414063,
+      "title": "Racer and the Jailbird",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 496915,
+      "title": "Nina",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 676710,
+      "title": "The Amazing Maurice",
+      "tmdb": "Comedy",
+      "judge": "Comedy"
+    },
+    {
+      "movie_id": 428449,
+      "title": "A Ghost Story",
+      "tmdb": "Romance",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 583903,
+      "title": "Our Friend",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 1108828,
+      "title": "Girls Will Be Girls",
+      "tmdb": "Romance",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 455551,
+      "title": "The Recall",
+      "tmdb": "Science Fiction",
+      "judge": "Science Fiction"
+    },
+    {
+      "movie_id": 814338,
+      "title": "Lady Chatterley's Lover",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+25/200 judged
+50/200 judged
+75/200 judged
+100/200 judged
+125/200 judged
+150/200 judged
+175/200 judged
+200/200 judged
+
+IMDBBINARY-NEW, judge claude-sonnet-5-5, 200 films
+raw agreement 91.5%
+unsure 15
+agreement when decided 98.9%
+Cohen's kappa 0.978
+disagreements by TMDb label: {'Romance': 2}

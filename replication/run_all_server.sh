@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Full-spec run of GIN + GraphSAGE across all 4 datasets, on the uni GPU
+# Full-spec run of GIN + GraphSAGE across all datasets, on the uni GPU
 # server. Meant to be launched inside tmux so it survives SSH disconnects:
 #
 #   ssh you@uni-server
@@ -21,13 +21,15 @@ echo "== $(date) : starting full run =="
 
 # Link the scraped new-data files into the official repo's expected layout
 # (dataset/<name>/<name>.txt) -- one-time, idempotent.
-for name in IMDBBINARY-NEW IMDBMULTI-NEW; do
+for name in IMDBBINARY-NEW IMDBMULTI-NEW IMDBBINARY-EGO2016 IMDBMULTI-EGO2016; do
     dest="replication/official-repo/dataset/$name"
     mkdir -p "$dest"
     cp -f "new_data/processed/$name/$name.txt" "$dest/$name.txt"
 done
 
-DATASETS=(IMDBBINARY IMDBMULTI IMDBBINARY-NEW IMDBMULTI-NEW)
+# Pass dataset names to run a subset, e.g. run_all_server.sh IMDBBINARY-EGO2016
+DATASETS=("$@")
+[ ${#DATASETS[@]} -gt 0 ] || DATASETS=(IMDBBINARY IMDBMULTI IMDBBINARY-NEW IMDBMULTI-NEW IMDBBINARY-EGO2016 IMDBMULTI-EGO2016)
 
 for ds in "${DATASETS[@]}"; do
     echo "== $(date) : GIN on $ds =="

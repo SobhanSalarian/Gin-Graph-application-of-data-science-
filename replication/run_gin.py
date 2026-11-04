@@ -19,6 +19,7 @@ import re
 import subprocess
 import sys
 import time
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 REPO_DIR = Path(__file__).parent / "official-repo"
@@ -56,6 +57,7 @@ def main():
     ap.add_argument("--dataset", required=True)
     ap.add_argument("--epochs", type=int, default=350)
     ap.add_argument("--tag", default="", help="suffix for the output filename, e.g. 'graphsage', so runs with different --extra flags on the same dataset don't overwrite each other")
+    ap.add_argument("--jobs", type=int, default=1, help="folds to run at the same time")
     ap.add_argument("--extra", nargs=argparse.REMAINDER, default=[])
     args = ap.parse_args()
 
@@ -63,20 +65,21 @@ def main():
     suffix = f"_{args.tag}" if args.tag else ""
     out_path = RESULTS_DIR / f"{args.dataset}{suffix}_cv_curves.json"
 
-    all_folds = []
     t0 = time.time()
-    for fold_idx in range(10):
+
+    def timed_fold(fold_idx):
         fstart = time.time()
         curve = run_fold(args.dataset, fold_idx, args.extra, args.epochs)
-        all_folds.append(curve)
         print(
             f"[{args.dataset}] fold {fold_idx} done in {time.time() - fstart:.1f}s "
             f"(final test_acc={curve[-1]['test_acc']:.4f})",
             flush=True,
         )
-        # write incrementally so partial progress survives if interrupted
-        out_path.write_text(json.dumps({"dataset": args.dataset, "epochs": args.epochs,
-                                         "extra_args": args.extra, "folds": all_folds}, indent=2))
+        return curve
+
+    # pool.map keeps fold order, whichever fold finishes first
+    with ThreadPoolExecutor(max_workers=args.jobs) as pool:
+        all_folds = list(pool.map(timed_fold, range(10)))
 
     # paper's model-selection procedure
     n_epochs = args.epochs

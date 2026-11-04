@@ -1,0 +1,1210 @@
+{
+  "model": "claude-sonnet-5-5",
+  "seed": 0,
+  "genres": [
+    "Action",
+    "Romance"
+  ],
+  "films": [
+    {
+      "movie_id": 7451,
+      "title": "xXx",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 27205,
+      "title": "Inception",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 1352755,
+      "title": "Maintenance Required",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 1181678,
+      "title": "\u00bfQuieres ser mi hijo?",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 290250,
+      "title": "The Nice Guys",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 293167,
+      "title": "Kong: Skull Island",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 615656,
+      "title": "Meg 2: The Trench",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 718032,
+      "title": "Licorice Pizza",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 43347,
+      "title": "Love & Other Drugs",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 1844,
+      "title": "Entrapment",
+      "tmdb": "Romance",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 417859,
+      "title": "Puss in Boots",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 153104,
+      "title": "Wicked Minds",
+      "tmdb": "Romance",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 57165,
+      "title": "Wrath of the Titans",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 398818,
+      "title": "Call Me by Your Name",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 1173558,
+      "title": "Burning Betrayal",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 588228,
+      "title": "The Tomorrow War",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 654,
+      "title": "On the Waterfront",
+      "tmdb": "Romance",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 134764,
+      "title": "Due West: Our Sex Journey",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 495764,
+      "title": "Birds of Prey (and the Fantabulous Emancipation of One Harley Quinn)",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 1581,
+      "title": "The Holiday",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 269955,
+      "title": "Obsessed",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 23483,
+      "title": "Kick-Ass",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 1246049,
+      "title": "Dracula",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 310593,
+      "title": "Youth",
+      "tmdb": "Romance",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 1597,
+      "title": "Meet the Parents",
+      "tmdb": "Romance",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 986056,
+      "title": "Thunderbolts*",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 480530,
+      "title": "Creed II",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 2251,
+      "title": "Unfaithful",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 959429,
+      "title": "Lonely Planet",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 324857,
+      "title": "Spider-Man: Into the Spider-Verse",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 1669,
+      "title": "The Hunt for Red October",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 72570,
+      "title": "The Vow",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 11247,
+      "title": "A Cinderella Story",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 289,
+      "title": "Casablanca",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 320288,
+      "title": "Dark Phoenix",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 1290182,
+      "title": "You Are the Apple of My Eye",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 1278,
+      "title": "The Dreamers",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 1865,
+      "title": "Pirates of the Caribbean: On Stranger Tides",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 1556616,
+      "title": "Summer House",
+      "tmdb": "Romance",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 10030,
+      "title": "Good Luck Chuck",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 1327862,
+      "title": "Regretting You",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 1390300,
+      "title": "Over Your Dead Body",
+      "tmdb": "Action",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 1522377,
+      "title": "Two Worlds One Wish",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 1892,
+      "title": "Return of the Jedi",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 54138,
+      "title": "Star Trek Into Darkness",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 346,
+      "title": "Seven Samurai",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 11362,
+      "title": "The Count of Monte Cristo",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 38684,
+      "title": "Jane Eyre",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 10207,
+      "title": "Message in a Bottle",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 818647,
+      "title": "Through My Window",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 166424,
+      "title": "Fantastic Four",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 57158,
+      "title": "The Hobbit: The Desolation of Smaug",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 49051,
+      "title": "The Hobbit: An Unexpected Journey",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 10530,
+      "title": "Pocahontas",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 812,
+      "title": "Aladdin",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 949,
+      "title": "Heat",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 4517,
+      "title": "Elizabeth: The Golden Age",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 533514,
+      "title": "Violet Evergarden: The Movie",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 353081,
+      "title": "Mission: Impossible - Fallout",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 50646,
+      "title": "Crazy, Stupid, Love.",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 345940,
+      "title": "The Meg",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 426,
+      "title": "Vertigo",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 653346,
+      "title": "Kingdom of the Planet of the Apes",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 1016121,
+      "title": "Beautiful Disaster",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 142093,
+      "title": "The Intimate",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 9489,
+      "title": "You've Got Mail",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 49521,
+      "title": "Man of Steel",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 1289936,
+      "title": "Downton Abbey: The Grand Finale",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 929590,
+      "title": "Civil War",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 82693,
+      "title": "Silver Linings Playbook",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 2022,
+      "title": "Mr. Deeds",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 351286,
+      "title": "Jurassic World: Fallen Kingdom",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 13971,
+      "title": "Wild Child",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 1392469,
+      "title": "Cocktail 2",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 969681,
+      "title": "Spider-Man: Brand New Day",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 271110,
+      "title": "Captain America: Civil War",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 1448560,
+      "title": "Wildcat",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 10198,
+      "title": "The Princess and the Frog",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 10761,
+      "title": "Made of Honor",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 7485,
+      "title": "Shooter",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 1729,
+      "title": "The Forbidden Kingdom",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 752,
+      "title": "V for Vendetta",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 19995,
+      "title": "Avatar",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 13,
+      "title": "Forrest Gump",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 81188,
+      "title": "Rise of the Guardians",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 11970,
+      "title": "Hercules",
+      "tmdb": "Romance",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 6282,
+      "title": "Coyote Ugly",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 18491,
+      "title": "Neon Genesis Evangelion: The End of Evangelion",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 2770,
+      "title": "American Pie 2",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 1571,
+      "title": "Live Free or Die Hard",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 1240889,
+      "title": "Teenage Sex and Death at Camp Miasma",
+      "tmdb": "Romance",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 603,
+      "title": "The Matrix",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 292431,
+      "title": "Love",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 855,
+      "title": "Black Hawk Down",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 537739,
+      "title": "Can You Keep a Secret?",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 396535,
+      "title": "Train to Busan",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 906221,
+      "title": "Magic Mike's Last Dance",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 455207,
+      "title": "Crazy Rich Asians",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 679,
+      "title": "Aliens",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 222935,
+      "title": "The Fault in Our Stars",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 348350,
+      "title": "Solo: A Star Wars Story",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 363088,
+      "title": "Ant-Man and the Wasp",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 217,
+      "title": "Indiana Jones and the Kingdom of the Crystal Skull",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 435901,
+      "title": "About Love",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 436270,
+      "title": "Black Adam",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 201085,
+      "title": "Crimson Peak",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 1265609,
+      "title": "War Machine",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 1400032,
+      "title": "10DANCE",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 1245,
+      "title": "The Remains of the Day",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 993708,
+      "title": "The Threesome",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 138103,
+      "title": "The Expendables 3",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 843527,
+      "title": "The Idea of You",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 12163,
+      "title": "The Wrestler",
+      "tmdb": "Romance",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 68721,
+      "title": "Iron Man 3",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 587792,
+      "title": "Palm Springs",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 882569,
+      "title": "Guy Ritchie's The Covenant",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 10096,
+      "title": "13 Going on 30",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 76338,
+      "title": "Thor: The Dark World",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 102899,
+      "title": "Ant-Man",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 1891,
+      "title": "The Empire Strikes Back",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 122,
+      "title": "The Lord of the Rings: The Return of the King",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 1284465,
+      "title": "The Death of Robin Hood",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 26389,
+      "title": "From Paris with Love",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 5038,
+      "title": "Vicky Cristina Barcelona",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 527641,
+      "title": "Five Feet Apart",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 361743,
+      "title": "Top Gun: Maverick",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 44912,
+      "title": "Green Lantern",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 9737,
+      "title": "Bad Boys",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 898704,
+      "title": "Desert Warrior",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 640146,
+      "title": "Ant-Man and the Wasp: Quantumania",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 660120,
+      "title": "The Worst Person in the World",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 10202,
+      "title": "Bedtime Stories",
+      "tmdb": "Romance",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 559,
+      "title": "Spider-Man 3",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 11130,
+      "title": "The Princess Diaries 2: Royal Engagement",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 75612,
+      "title": "Oblivion",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 1140498,
+      "title": "Is This Thing On?",
+      "tmdb": "Romance",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 268,
+      "title": "Batman",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 402431,
+      "title": "Wicked",
+      "tmdb": "Romance",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 323260,
+      "title": "The Gigolo",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 843,
+      "title": "In the Mood for Love",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 1196067,
+      "title": "Worldbreaker",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 61791,
+      "title": "Rise of the Planet of the Apes",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 744275,
+      "title": "After We Fell",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 1371185,
+      "title": "Song Sung Blue",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 1369,
+      "title": "Rambo: First Blood Part II",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 6620,
+      "title": "Sabrina",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 131634,
+      "title": "The Hunger Games: Mockingjay - Part 2",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 81005,
+      "title": "Jack the Giant Slayer",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 1196573,
+      "title": "She Rides Shotgun",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 168259,
+      "title": "Furious 7",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 639933,
+      "title": "The Northman",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 13333,
+      "title": "Game of Death",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 6877,
+      "title": "Failure to Launch",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 293863,
+      "title": "The Age of Adaline",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 617126,
+      "title": "The Fantastic 4: First Steps",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 1003813,
+      "title": "Out of the Blue",
+      "tmdb": "Romance",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 283995,
+      "title": "Guardians of the Galaxy Vol. 2",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 1072790,
+      "title": "Anyone but You",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 511809,
+      "title": "West Side Story",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 907,
+      "title": "Doctor Zhivago",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 708,
+      "title": "The Living Daylights",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 634,
+      "title": "Bridget Jones's Diary",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 776503,
+      "title": "CODA",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 251,
+      "title": "Ghost",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 135397,
+      "title": "Jurassic World",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 9919,
+      "title": "How to Lose a Guy in 10 Days",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 458156,
+      "title": "John Wick: Chapter 3 - Parabellum",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 52451,
+      "title": "The Three Musketeers",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 11775,
+      "title": "Intolerable Cruelty",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 828613,
+      "title": "About Fate",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 257344,
+      "title": "Pixels",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 124905,
+      "title": "Godzilla",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 343668,
+      "title": "Kingsman: The Golden Circle",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 1413976,
+      "title": "Citizen Vigilante",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 254320,
+      "title": "The Lobster",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 800939,
+      "title": "Ticket to Paradise",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 228794,
+      "title": "Provocation",
+      "tmdb": "Romance",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 142,
+      "title": "Brokeback Mountain",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 1643,
+      "title": "Last Tango in Paris",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 1495,
+      "title": "Kingdom of Heaven",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 37430,
+      "title": "Conan the Barbarian",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 792307,
+      "title": "Poor Things",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 24405,
+      "title": "Chasers",
+      "tmdb": "Romance",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 82702,
+      "title": "How to Train Your Dragon 2",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 9509,
+      "title": "Man on Fire",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 1280738,
+      "title": "The Furious",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 11036,
+      "title": "The Notebook",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 615457,
+      "title": "Nobody",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 4614,
+      "title": "The Sum of All Fears",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 1035259,
+      "title": "The Naked Gun",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 299687,
+      "title": "The 5th Wave",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 4951,
+      "title": "10 Things I Hate About You",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 605,
+      "title": "The Matrix Revolutions",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 197796,
+      "title": "Beauty and the Beast",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 24420,
+      "title": "The Time Traveler's Wife",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 1242332,
+      "title": "Normal",
+      "tmdb": "Action",
+      "judge": "UNSURE"
+    },
+    {
+      "movie_id": 1934,
+      "title": "Shakespeare in Love",
+      "tmdb": "Romance",
+      "judge": "Romance"
+    },
+    {
+      "movie_id": 1223601,
+      "title": "Sisu: Road to Revenge",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 119450,
+      "title": "Dawn of the Planet of the Apes",
+      "tmdb": "Action",
+      "judge": "Action"
+    },
+    {
+      "movie_id": 476669,
+      "title": "The King's Man",
+      "tmdb": "Action",
+      "judge": "Action"
+    }
+  ]
+}

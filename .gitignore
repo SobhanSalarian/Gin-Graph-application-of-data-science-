@@ -8,3 +8,14 @@ replication/official-repo/
 new_data/raw/
 results/logs/*.log
 .env
+
+# Too large for GitHub (over 100 MB)
+*.mp4
+# Unit assessment briefs belong to the university, not this repo
+Assessment-Project-*.pdf
+# LaTeX build files
+report/*.aux
+report/*.bbl
+report/*.blg
+report/*.log
+report/*.out

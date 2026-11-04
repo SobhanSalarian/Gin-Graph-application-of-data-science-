@@ -1,0 +1,8 @@
+  [Comedy] found 500 candidate movies (wanted 500)
+  [Romance] found 500 candidate movies (wanted 500)
+  [Science Fiction] found 500 candidate movies (wanted 500)
+
+Wrote 1484 graphs to E:\Session2 - 2026\App Of Data science\Assign1 temp4\new_data\processed\IMDBMULTI-2016
+Avg nodes: 17.8, avg edges: 156.4
+Label counts: {'Comedy': 500, 'Romance': 491, 'Science Fiction': 493}
+Release dates: 2016-01-14 to 2026-10-29

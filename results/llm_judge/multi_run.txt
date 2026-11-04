@@ -1,0 +1,19 @@
+25/300 judged
+50/300 judged
+75/300 judged
+100/300 judged
+125/300 judged
+150/300 judged
+175/300 judged
+200/300 judged
+225/300 judged
+250/300 judged
+275/300 judged
+300/300 judged
+
+IMDBMULTI-NEW, judge claude-sonnet-5-5, 300 films
+raw agreement 89.3%
+unsure 26
+agreement when decided 97.8%
+Cohen's kappa 0.967
+disagreements by TMDb label: {'Romance': 3, 'Comedy': 3}
