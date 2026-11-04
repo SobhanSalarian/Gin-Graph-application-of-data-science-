@@ -50,7 +50,7 @@ and builds the graph's representation by summing node features at every layer an
 
 \textbf{Evaluation.} The paper reports graph classification accuracy on nine benchmarks using 10-fold cross-validation. For each epoch, test accuracy is averaged across the folds; the single epoch with the highest average is selected, and the mean and standard deviation across folds at that epoch are reported. Every model has 5 GNN layers and 2-layer MLPs and is trained with Adam at a learning rate of 0.01, halved every 50 epochs, for 350 epochs. The paper tunes hidden units, batch size and dropout per dataset; the official code's defaults are 64 hidden units, batch size 32 and dropout 0.5. GIN-0, the variant with $\epsilon$ fixed at 0, reaches 75.1 $\pm$ 5.1\% on IMDB-BINARY and 52.3 $\pm$ 2.8\% on IMDB-MULTI. The GraphSAGE approximation, Max--1-layer, reaches 72.3 $\pm$ 5.3\% and 50.9 $\pm$ 2.2\%.
 
-\textbf{Justification.} ICLR is ranked A* by CORE. The paper has \todo{current Google Scholar citation count and access date}. Its official code is public, and its theory gives an explicit reason to expect a result to hold or fail, which suits an investigation on new data. The task also transfers well: any dataset in the same text format can be run with no change to the model.
+\textbf{Justification.} ICLR is ranked A* by CORE, and the paper is widely cited in graph learning. Its official code is public under the MIT licence, and its theory gives an explicit reason to expect a result to hold or fail, which suits an investigation on new data. The task also transfers well: any dataset in the same text format can be run with no change to the model.
 
 \section{Description of the Original Dataset}
 \label{sec:data}
@@ -240,17 +240,23 @@ The judge's most useful result was unplanned. When we first ran it on the earlie
 \section{Ethical Considerations}
 \label{sec:ethics}
 
-\todo{Rework using the unit's ethics resources, which were not available when drafting.}
+Ethics statements are increasingly expected in published work. \citet{benotti2022ethics} classify such sections by whether they cover research benefits, potential harms, and the groups affected, and \citet{karamolegkou2025ethicon} find that the most common concerns in ACL ethics statements are bias, misuse and privacy, while many papers report no concerns at all. We follow that structure, and we also consider data licensing, which matters most here. The Australian Code \citep{nhmrc2018code} expects research to be honest, transparent and accountable, and to comply with relevant conditions.
 
-\textbf{Original work.} The IMDB benchmarks were derived from public film credits, not from data about private behaviour, and the paper shares its code and data, which supports verification. However, the benchmarks describe real people. \todo{Check how the original data was collected and under what terms.}
+\textbf{Benefits.} Replication checks whether a published claim holds, and the paper's public code and data made ours possible. Our negative result on the first scrape, and the checks it led to, may help others avoid the same mistake when building graph datasets.
 
-\textbf{New data and terms of use.} The Australian Code \citep{nhmrc2018code} expects research to be honest, transparent and accountable, and to comply with relevant conditions. This matters most for our data source. TMDb's terms \citep{tmdbterms} do not permit commercial use, and they treat training or validating machine learning systems on its content as commercial use needing a written agreement. They do not mention academic use, cache data for at most six months, and require attribution. Our proposal assumed academic use was unproblematic, and we did not read these clauses before collecting. \textbf{Licence and use declaration.} The new datasets and metadata in this project were created for non-commercial university coursework only. They must not be used for any commercial purpose. Any reuse, redistribution or publication beyond this assessment requires the appropriate licence and written permission from TMDb. No such licence is claimed here, and our repository does not grant one. Publishing a research paper on this data would need the same permission.
+\textbf{Original work.} IMDB-BINARY and IMDB-MULTI were released by \citet{yanardag2015deep}, built from public IMDb film credits, and are distributed inside the official repository, whose code is under the MIT licence. Neither the paper nor the repository states terms for the data itself, so we used it only to replicate the published results. Our repository does not redistribute it: the setup script downloads it from the official repository. The graphs hold only anonymous node numbers and genre labels, with no names.
+
+\textbf{New data and terms of use.} Our new data comes from the TMDb API, not from the IMDb website. TMDb's terms \citep{tmdbterms} do not permit commercial use, and they treat training or validating machine learning systems on its content as commercial use needing a written agreement. They do not mention academic use, cache data for at most six months, and require attribution. Our proposal assumed academic use was unproblematic, and we did not read these clauses before collecting. \textbf{Licence and use declaration.} The new datasets and metadata in this project were created for non-commercial university coursework only. They must not be used for any commercial purpose. Any reuse, redistribution or publication beyond this assessment requires the appropriate licence and written permission from TMDb. No such licence is claimed here, and our repository does not grant one. Publishing a research paper on this data would need the same permission.
 
 \textbf{Attribution.} This product uses the TMDb API but is not endorsed or certified by TMDb.
 
-\textbf{People in the data.} Our metadata holds real actors' names. These are public credits, but a genre-labelled collaboration graph can still be sensitive, because it reveals who works with whom and can reinforce associations with genres. Genre labels may also reflect the biases of TMDb's contributors, and popularity sampling may favour mainstream English-language films, so results may not generalise to other film industries.
+\textbf{Privacy.} Unlike the original graphs, our metadata holds real actors' names and TMDb identifiers, which we keep so that labels can be checked. These are public credits, and no consent was sought, which is normal for public filmographies. A genre-labelled collaboration graph still reveals who works with whom, so the graph files themselves use anonymous node numbers, and names appear only in the metadata.
 
-\textbf{Reporting and use of AI.} We report the failed construction, because omitting it would overstate the method's success on new data. Generative AI was used in this project for \todo{describe the actual use}, and all claims and references were checked by the author.
+\textbf{Bias.} Genre labels reflect the judgements of TMDb's contributors, and sampling by popularity favours mainstream, mostly English-language films. Results may not generalise to other film industries, and a model trained on this data could reinforce links between actors and genres.
+
+\textbf{Misuse.} We see little direct risk in genre classification. The same methods could be used to profile people from their professional networks, which is one reason the declaration above limits reuse.
+
+\textbf{Honest reporting.} We report the failed construction and the date filter bug, because omitting them would overstate the method's success on new data. We also state where our setup departs from the paper's, such as untuned hyperparameters and CPU runs.
 
 \section{Conclusions and Reflections}
 \label{sec:conclusion}
@@ -258,6 +264,31 @@ The judge's most useful result was unplanned. When we first ran it on the earlie
 Replication was successful. The official code ran with one device fix, results fell within one standard deviation of the paper, and the Max--1-layer baseline matched closely. GIN also generalised to new data once the graphs carried real structure, beating the node-count baseline on every such dataset. Its theoretical advantage appeared clearly only on ENZYMES; on film ego-networks it was within noise, as on the original data. Higher expressive power therefore did not guarantee a measurable gain on every task.
 
 The most useful lesson came from our own mistake. Mean density of exactly 1.000 was visible from the first dataset we built, and the accuracy drop looked like a finding about GIN until we tested the data itself. A simple baseline and a clique count would have caught it before any GPU time was spent, and both now run first. The same applies to the date filter, which failed silently, so a filter needs checking against its output. A further lesson is that a data source's terms need reading in full before collection. We also learned to measure before assuming: a short timing test showed the GPU was the slower choice for GraphSAGE on dense graphs.
+
+\section*{Generative AI Acknowledgement}
+
+In line with Macquarie University's guidance on AI tools, I acknowledge:
+\begin{itemize}
+\setlength{\itemsep}{1pt}
+\item \textbf{Claude Code} (Anthropic, Claude Opus 5.5), August to November 2026:
+  \begin{itemize}
+  \setlength{\itemsep}{0pt}
+  \item helping me plan the project steps from the brief and rubric, and structure the proposal, presentation and this report;
+  \item writing, debugging and running the code, including the cross-validation driver, TMDb scraper, ego-network builder, ENZYMES converter, dataset checks, LLM judge and figure script, and running jobs on the university GPU server under my supervision;
+  \item diagnosing problems, including the GPU device bug, the slow Max--1-layer runs and the date filter bug;
+  \item drafting text, tables and the figure, suggesting sources, and writing the report in \LaTeX.
+  \end{itemize}
+\item \textbf{Claude Sonnet 5.5} (Anthropic), used as the LLM judge in Section~\ref{sec:judge}. Its outputs are evaluated as experimental results and were not used to write the report.
+\end{itemize}
+
+\textbf{Verification.}
+\begin{itemize}
+\setlength{\itemsep}{1pt}
+\item I obtained the TMDb API key, set up access to the university server, and ran the Google Colab notebooks.
+\item I checked results against the data, which led to corrections, for example the clique construction, the ignored date filter and the description of the paper's hyperparameters.
+\item I reviewed the sources and edited the text.
+\end{itemize}
+I remain responsible for the accuracy, references and content of this report. A dated project log is in our repository (\texttt{plan.md}).
 
 \bibliography{references}
 
