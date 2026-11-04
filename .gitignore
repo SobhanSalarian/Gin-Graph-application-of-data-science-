@@ -19,3 +19,5 @@ report/*.bbl
 report/*.blg
 report/*.log
 report/*.out
+# Copy of the unit brief, which belongs to the university
+instructions .md

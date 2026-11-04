@@ -1,6 +1,12 @@
 # Project Plan — Replicating GIN (Graph Isomorphism Network)
 
-Last updated: 2026-08-26
+Last updated: 2026-11-04
+
+> **Final status (2026-11-04).** Sections 1-11 below are the working log up to 2026-08-26 and are kept as history. Where they disagree with this box or with `report/report.tex`, the report is correct. Section 12 covers the work since then.
+>
+> - Repository moved to `github.com/SobhanSalarian/Gin-Graph-application-of-data-science-`; the old `SobhanSalarianCognitivo` account is no longer used.
+> - The first TMDb scrape (`IMDBBINARY-NEW`, `IMDBMULTI-NEW`) had two faults: every graph was an exact clique (not "near-clique"), and the date filter was silently ignored, so pre-2016 films were included. Both are fixed; see section 12.
+> - TMDb's terms treat training or validating ML systems as commercial use and do not mention academic use. The report carries a licence and use declaration: coursework only, no commercial use, any other use needs a licence and written permission from TMDb.
 
 ---
 
@@ -139,10 +145,10 @@ Question this answers: does GraphSAGE's ~2-3 point gap behind GIN on the origina
 
 ## 8. Deliverables (Phase E)
 
-- [ ] Project proposal draft (`proposal/`) — paper justification, feasibility, plan
-- [ ] Update presentation (`presentation/`)
-- [ ] Final report (`report/`) — full writeup with all results, code, new data, limitations
-- [ ] Clean up GitHub repo for submission (report, scripts, new data, README)
+- [x] Project proposal (`proposal/`)
+- [x] Update presentation (`presentation/`)
+- [x] Final report (`report/`), due 2026-11-06
+- [x] GitHub repo with README, report, scripts and new data
 
 ## 9. Decisions log
 
@@ -162,7 +168,33 @@ Question this answers: does GraphSAGE's ~2-3 point gap behind GIN on the origina
 
 - None currently blocking
 
-## 11. Next step
+## 12. Final phase (2026-10 to 2026-11)
+
+- [x] **Clique flaw found.** A clique count and a node-count-only classifier (`new_data/scraping/check_dataset.py`) showed all 2,488 first-scrape graphs were cliques, so node count was the only signal. GIN and GraphSAGE both sat at the node-count baseline (about 56% and 41%).
+- [x] **Ego-network rebuild.** `new_data/scraping/build_ego_networks.py` builds one graph per (actor, genre) as in Yanardag & Vishwanathan (2015), skipping actors with one film in the genre. 500 graphs per genre, seed 0.
+- [x] **LLM as judge.** `evaluation/llm_judge.py` has Claude label 100 films per genre from title and cast only. Its disagreements exposed pre-2016 films, which led to the date filter bug.
+- [x] **Date filter bug fixed.** The scraper sent `primary_release_date_gte` instead of `primary_release_date.gte`; TMDb ignored it without an error. Fixed, re-scraped to `IMDBBINARY-2016` (993 films) and `IMDBMULTI-2016` (1,484 films), all dated 2016-01-14 to 2026-10-29, and the scraper now stops if any film is earlier. Ego datasets rebuilt as `IMDBBINARY-EGO2016` and `IMDBMULTI-EGO2016`; the earlier ego datasets built on the faulty films were deleted.
+- [x] **ENZYMES** added as an existing dataset outside the paper, converted with `new_data/scraping/convert_tu_dortmund.py`.
+- [x] **GraphSAGE on CPU.** Max pooling took about 26 s/epoch on the shared GPU against 13 s on one CPU core, so the two ego-network GraphSAGE jobs ran on CPU, 10 folds at once (`run_gin.py --jobs 10`), in under 2 hours each instead of about 25.
+- [x] **Report** written in `report/` (ACL template), with the learning-curve figure from `report/make_figures.py`.
+- [ ] Failure analysis per graph: dropped, because the driver saves per-fold accuracy only. Listed as future work in the report.
+- [ ] WL toy experiment and GCN comparison: not done, out of time.
+
+**Final results** (test accuracy %, mean ± std over 10 folds):
+
+| Dataset | GIN-0 | Max-1-layer | Node-count baseline |
+|---|---|---|---|
+| IMDB-BINARY (server) | 73.9 ± 2.7 | 72.6 ± 3.0 | 58.1 |
+| IMDB-MULTI (server) | 50.6 ± 2.7 | 50.9 ± 2.8 | 40.1 |
+| First scrape, binary | 55.9 ± 2.3 | 56.2 ± 2.3 | 56.0 |
+| First scrape, multi | 41.0 ± 2.3 | 41.0 ± 2.2 | 40.5 |
+| Ego-networks, binary | 74.4 ± 2.5 | 74.0 ± 1.9 | 57.7 |
+| Ego-networks, multi | 59.7 ± 4.4 | 57.6 ± 5.0 | 46.3 |
+| ENZYMES | 48.5 ± 7.0 | 33.3 ± 5.6 | 23.5 |
+
+LLM judge on the 2016 films: binary kappa 1.000 (188 decided of 200), multi kappa 0.946 (250 decided of 300).
+
+## 11. Next step (as of 2026-08-26, superseded by section 12)
 
 GIN + GraphSAGE results are now fully logged for all 4 datasets (sections 4 and 7) — both algorithms ran to completion on the uni GPU server on 2026-08-26. Remaining items before Phase E:
 1. Dig deeper into *why* accuracy drops on the new data, and why GIN's edge over GraphSAGE vanishes there — check whether misclassified new-data graphs correlate with edge density/clique-ness (data already available in the `_metadata.json` files + saved CV curves in `results/logs/`)
