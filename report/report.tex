@@ -141,7 +141,29 @@ ENZYMES \citep{borgwardt2005protein} contains 600 protein tertiary structures, 1
 
 The rebuilt data is close to the originals in density and has real structural variety (Table~\ref{tab:stats}). There are two main differences. Graphs are more than twice the size of IMDB-BINARY's, because each film contributes up to 20 actors. Cliques are almost absent because of the exclusion above, against 13.9\% and 52.6\% in the originals. As in the originals, ego-networks overlap, so train and test graphs can share actors. An actor who appears in both genres has an ego-network in each, built from different films and given different labels.
 
-\textbf{Pipeline and checks.} The data is built in three steps, each a script in our repository: \texttt{build\_tmdb\_dataset.py} collects films and credits, \texttt{build\_ego\_networks.py} forms the graphs from the saved metadata without further API calls, and \texttt{check\_dataset.py} tests the result. The check reports density, the share of cliques, the number of distinct degree sequences, and the 10-fold accuracy of a classifier that predicts the most common class for each node count; these are the columns of Table~\ref{tab:stats}. A dataset where most graphs are cliques, or where node count alone is nearly as accurate as a trained model, cannot test a structure-sensitive model, so every dataset now passes this check before any training.
+\textbf{Pipeline and checks.} The data is built in three steps, each a script in our repository: \texttt{build\_tmdb\_dataset.py} collects films and credits, \texttt{build\_ego\_networks.py} forms the graphs from the saved metadata without further API calls, and \texttt{check\_dataset.py} tests the result. The check reports density, the share of cliques, the number of distinct degree sequences, and the 10-fold accuracy of a classifier that predicts the most common class for each node count; these are the columns of Table~\ref{tab:stats}. A dataset where most graphs are cliques, or where node count alone is nearly as accurate as a trained model, cannot test a structure-sensitive model, so every dataset now passes this check before any training. Figure~\ref{fig:newsnippet} shows a collected film record and the start of the resulting graph file.
+
+\begin{figure}[t]
+\scriptsize
+\begin{verbatim}
+Film record (IMDBBINARY-2016 metadata):
+{"movie_id": 1058424, "title": "Hope",
+ "label": "Action", "release_date": "2026-07-15",
+ "n_nodes": 20, "actor_ids": [68903, 127564, ...],
+ "actor_names": ["Hwang Jung-min", ...]}
+
+Graph file (IMDBBINARY-EGO2016.txt):
+1000              <- number of graphs
+39 0              <- 39 nodes, label 0 (Action)
+0 38 1 2 3 ... 38 <- the ego, linked to all others
+0 19 0 3 4 ...    <- a co-star with 19 links
+
+Graph metadata:
+{"ego": 75175, "label": "Action", "n_films": 2}
+\end{verbatim}
+\caption{Snippets of our new data. Each graph is one actor's ego-network; node numbers are anonymous, and the metadata links each graph to its TMDb actor id.}
+\label{fig:newsnippet}
+\end{figure}
 
 \section{Results on New Data}
 \label{sec:results}
