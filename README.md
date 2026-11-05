@@ -1,6 +1,6 @@
 # Replicating and Extending *How Powerful are Graph Neural Networks?*
 
-COMP8240 Applications of Data Science, Macquarie University, Session 2 2026. Novel project by Sobhan Salarian.
+COMP8240 Applications of Data Science, Macquarie University, Session 2 2026. Novel project by Sobhan Salarian (sobhan.salarian@students.mq.edu.au).
 
 This project replicates the graph classification results of Xu et al., ["How Powerful are Graph Neural Networks?"](https://arxiv.org/abs/1810.00826) (ICLR 2019), using the authors' [official code](https://github.com/weihua916/powerful-gnns), and then tests the same method on new data:
 
@@ -47,9 +47,9 @@ Test accuracy (%), mean ± standard deviation over 10 folds, at the epoch chosen
 | `new_data/processed/` | All datasets in the official code's text format, with metadata |
 | `evaluation/llm_judge.py` | LLM-as-judge check of the genre labels |
 | `results/logs/` | Per-epoch, per-fold accuracy for every run, with summaries |
-| `results/llm_judge/` | Every judge answer and the summary figures |
+| `results/llm_judge/` | Every judge answer and the summary figures. Files ending `-NEW` are the first run, on the faulty scrape, which exposed the date bug |
+| `results/scraping/` | Logs of each TMDb scrape |
 | `notebooks/` | Earlier Google Colab notebooks used before moving to the GPU server |
-| `proposal/`, `presentation/` | Earlier assessment tasks |
 | `plan.md` | Working log of the project, with dated decisions |
 
 Dataset names in `new_data/processed/`:

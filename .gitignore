@@ -21,3 +21,8 @@ report/*.log
 report/*.out
 # Copy of the unit brief, which belongs to the university
 instructions .md
+# Kept on the laptop only: earlier assessment tasks and personal notes
+presentation/
+proposal/
+docs/
+results/server_progress.log
